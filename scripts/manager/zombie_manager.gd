@@ -3,7 +3,7 @@ class_name ZombieManager
 
 @onready var main_game: MainGameManager = $"../.."
 ## 最大波次
-@export var max_wave := 50
+var max_wave :int
 var current_wave := 0
 var wave_total_health := 0
 var wave_current_health := 0
@@ -17,7 +17,8 @@ var flag_front_wave := false	#是否为旗前波
 
 ## 所有僵尸行
 @export var zombies_row:Array
-@export var flag_progress_bar: FlagProgressBar
+@onready var flag_progress_bar: FlagProgressBar = $FlagProgressBar
+
 ## 自然刷新计时器
 @onready var wave_timer: Timer = $WaveTimer
 ## 每秒进度条更新计时器
@@ -61,17 +62,6 @@ var zombie_weights = {
 	Global.ZombieType.ZombiePaper: 3000       # 读报权重
 }
 
-
-## **统一的僵尸种类刷新列表**，这将定义整局游戏每波可以刷新的僵尸种类
-@export var zombie_refresh_types : Array[Global.ZombieType] = [
-	Global.ZombieType.ZombieNorm,       # 普通僵尸
-	#Global.ZombieType.ZombieFlag,       # 旗帜僵尸
-	Global.ZombieType.ZombieCone,       # 路障僵尸
-	Global.ZombieType.ZombiePoleVaulter, # 撑杆僵尸
-	Global.ZombieType.ZombieBucket,      # 铁桶僵尸
-	Global.ZombieType.ZombiePaper      # 读报僵尸
-	
-]
 #endregion
 
 #region 关卡前展示僵尸
@@ -88,22 +78,19 @@ const trophy_scenes = preload("res://scenes/ui/trophy.tscn")
 
 # 生成100波出怪列表，每波最多50只僵尸
 func _ready():
-	
 	create_spawn_list()
-	# 不直接调用初始化，延迟调用
-	call_deferred("_init_var")
-	
-	#show_zombie_create()
 
-func _init_var():
-	zombies_row = get_tree().root.get_node("MainGame/Zombies").get_children()
-	flag_progress_bar = get_tree().root.get_node("MainGame/FlagProgressBar")
+
+## 初始僵尸管理器
+func init_zombie_manager(zombies:Node2D, max_wave:int):
+	zombies_row = zombies.get_children()
+	self.max_wave = max_wave
 	flag_progress_bar.init_flag_from_wave(max_wave)
 
 	progress_bar_segment_every_wave = 100.0 / (max_wave - 1)
 	
 #region 生成僵尸列表
-
+# 生成100波出怪列表，每波最多50只僵尸
 func create_spawn_list():
 	"""
 	大波（每10波一次）会优先生成一定数量的特殊僵尸（旗帜僵尸和普通僵尸），且战力上限是普通波的2.5倍。
@@ -181,12 +168,12 @@ func get_random_zombie_based_on_weight() -> int:
 	var max_weight = 0
 	
 	# 计算所有可能僵尸的权重总和
-	for zombie_type in zombie_refresh_types:
+	for zombie_type in main_game.zombie_refresh_types:
 		max_weight += zombie_weights[zombie_type]
 
 	var random_value = randi_range(0, max_weight)  # 使用动态计算的最大权重
 
-	for zombie_type in zombie_refresh_types:
+	for zombie_type in main_game.zombie_refresh_types:
 		cumulative_weight += zombie_weights[zombie_type]
 		
 		if random_value < cumulative_weight:
@@ -438,13 +425,13 @@ func update_current_wave():
 
 ## 随时间更新进度条
 func _on_one_wave_progress_timer_timeout() -> void:
-	# 每秒进度条增加
+	# 每秒进度条增加对应的进度值
 	flag_progress_bar.set_progress_add_every_sec(progress_bar_segment_mini_every_sec)
 
 
 #region 生成关卡前展示僵尸
 func show_zombie_create():
-	for zombie_type in zombie_refresh_types:
+	for zombie_type in main_game.zombie_refresh_types:
 		for i in range(randi_range(1, 4)):
 
 			var z:ZombieBase = Global.ZombieTypeSceneMap[zombie_type].instantiate()

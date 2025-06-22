@@ -15,26 +15,16 @@ extends Node
 #阳光： 800
 #Ui2 : 900 鼠标移入UI时，在植物和僵尸下面
 #真实铲子 : 950
+#血量显示： 980
 #UI3： 1000 进度条、准备放置植物
 #UI4： 1100 所有备选植物卡槽
 #UI5:  1150 卡片选择移动时临时位置
 #奖杯： 2000
-
+#region 角色
 # 定义枚举
 enum CharacterType {Plant, Zombie}
 
-enum PlantType {
-	PeaShooterSingle, 
-	SunFlower, 
-	CherryBomb,
-	WallNut,
-	PotatoMine,
-	SnowPea,
-	Chomper,
-	PeaShooterDouble,
-	}
-
-
+#region 卡片
 enum CardInfoAttribute {
 	CoolTime,
 	SunCost,	
@@ -74,8 +64,19 @@ var CardInfo = {
 		CardInfoAttribute.SunCost: 200
 		},
 }
+#endregion
 
-
+#region 植物
+enum PlantType {
+	PeaShooterSingle, 
+	SunFlower, 
+	CherryBomb,
+	WallNut,
+	PotatoMine,
+	SnowPea,
+	Chomper,
+	PeaShooterDouble,
+	}
 
 var PlantTypeSceneMap = {
 	PlantType.PeaShooterSingle: preload("res://scenes/character/plant/001_pea_shooter_single.tscn"),
@@ -99,7 +100,9 @@ var StaticPlantTypeSceneMap = {
 	PlantType.PeaShooterDouble: preload("res://scenes/character/plant/008_pea_shooter_double_static.tscn"),
 }
 
+#endregion
 
+#region 僵尸
 enum ZombieType {
 	ZombieNorm, 
 	ZombieFlag, 
@@ -117,13 +120,32 @@ var ZombieTypeSceneMap = {
 	ZombieType.ZombieBucket: preload("res://scenes/character/zombie/005_zombie_bucket.tscn"),
 	ZombieType.ZombiePaper: preload("res://scenes/character/zombie/006_zombie_paper.tscn"),
 }
+#endregion
 
+#endregion
+
+#region 子弹种类
 ## 普通，穿透，真实
 enum BulletMode {
 	Norm, 			# 按顺序对二类防具、一类防具、本体造成伤害
 	penetration, 	# 对二类防具造成伤害同时对一类防具造成伤害
 	real			# 不对二类防具造成伤害，直接对一类防具造成伤害
 	} 
+
+#endregion
+
+#region 游戏背景
+enum GameBg{
+	FrontDay,
+	FrontNight
+}
+
+var GameBgTextureMap = {
+	GameBg.FrontDay: preload("res://assets/image/background/background1.jpg"),
+	GameBg.FrontNight: preload("res://assets/image/background/background2.jpg"),
+	#GameBg.BackNight: preload("res://assets/bg_back_night.png"),
+}
+
 #endregion
 
 
@@ -136,6 +158,7 @@ const CONGIF_PATH := "user://config.ini"
 var auto_collect_sun := false
 var auto_collect_coin := false
 var disappear_spare_card_Placeholder := false
+var display_plant_HP_label := false
 
 var time_scale := 1.0
 
@@ -149,6 +172,7 @@ func save_config():
 	config.set_value("user_control", "auto_collect_sun", auto_collect_sun) 
 	config.set_value("user_control", "auto_collect_coin", auto_collect_coin) 
 	config.set_value("user_control", "disappear_spare_card_Placeholder", disappear_spare_card_Placeholder) 
+	config.set_value("user_control", "display_plant_HP_label", display_plant_HP_label) 
 
 	config.save(CONGIF_PATH)
 	
@@ -174,6 +198,7 @@ func load_config():
 	auto_collect_sun = config.get_value("user_control", "auto_collect_sun", false) 
 	auto_collect_coin = config.get_value("user_control", "auto_collect_coin", false) 
 	disappear_spare_card_Placeholder = config.get_value("user_control", "disappear_spare_card_Placeholder", false) 
+	display_plant_HP_label = config.get_value("user_control", "display_plant_HP_label", false) 
 	
 	
 	

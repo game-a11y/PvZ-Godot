@@ -1906,12 +1906,9 @@ tracks/156/path = NodePath(".")
 tracks/156/interp = 1
 tracks/156/loop_wrap = true
 tracks/156/keys = {
-"times": PackedFloat32Array(0.416667, 1.27),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(1.27),
+"transitions": PackedFloat32Array(1),
 "values": [{
-"args": [],
-"method": &"_attack_once"
-}, {
 "args": [],
 "method": &"_attack_once"
 }]

@@ -1,6 +1,9 @@
 extends Control
 class_name CardManager
 
+## 主游戏场景
+@onready var main_game: MainGameManager = $"../.."
+
 @onready var grid_container: GridContainer = $CardChooser/TextureRect/GridContainer
 @onready var card_chooser: Control = $CardChooser
 @onready var card_bar_and_shovel: Control = $CardBarAndShovel
@@ -19,8 +22,6 @@ var current_tween_id := {}
 @export var cards : Array[Card] = []
 ## 卡槽占位节点
 @export var cards_placeholder:Array = []
-## 最大卡槽数量
-@export_range(1,10) var max_choosed_card_num :int = 10
 @onready var card_placeholder_ori: TextureRect = $CardBarAndShovel/CardBarBg/CardUiList/CardPlaceholder_ori
 
 
@@ -28,12 +29,6 @@ var current_tween_id := {}
 @export_group("阳光")
 @export var start_sun : int
 @onready var curr_sun_value: Label = $CardBarAndShovel/CardBarBg/SunLabelControl/CurrSunValue
-
-
-@export_group("是否为测试场景")
-@export var is_test := false
-
-
 
 var sun: 
 	get:
@@ -49,36 +44,34 @@ var sun:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	sun = start_sun
-	if not is_test:
-		## 初始化待选卡槽
-		_init_CardChooser()
-		## 初始化选择卡槽
-		_init_card_bar()
-	else:
-		for card_placeholder in card_ui_list.get_children():
+
+## 测试场景直接对卡片获取卡片列表
+func test_scenes_init_cards():
+	for card_placeholder in card_ui_list.get_children():
 			cards.append(card_placeholder.get_node("Card"))
 
 	
-## 初始化选择卡槽
-func _init_card_bar():
-	for i in range(max_choosed_card_num):
+## 初始化出战卡槽
+func init_card_bar():
+	for i in range(main_game.max_choosed_card_num):
 		var cloned_card_placeholder = card_placeholder_ori.duplicate()
 		card_ui_list.add_child(cloned_card_placeholder)
 		
 	card_placeholder_ori.free()	## 立即删除掉该节点，下面获取卡槽占位节点
 	cards_placeholder = card_ui_list.get_children()
 
+## 是否显示多余卡槽
 func judge_disappear_add_card_bar():
 	if Global.disappear_spare_card_Placeholder:
-		if len(cards) < max_choosed_card_num:
-			for i in range(len(cards),max_choosed_card_num):
+		if len(cards) < main_game.max_choosed_card_num:
+			for i in range(len(cards),main_game.max_choosed_card_num):
 				cards_placeholder[i].visible = false
 	else:
-		for i in range(max_choosed_card_num):
+		for i in range(main_game.max_choosed_card_num):
 			cards_placeholder[i].visible = true
 			
 ## 根据Global文件初始化生成待选卡片
-func _init_CardChooser():
+func init_CardChooser():
 	# 加载场景文件
 	var card_chooser_placeholder = grid_container.get_children()
 
@@ -89,7 +82,8 @@ func _init_CardChooser():
 		card_in_seed_chooser.card.card_click.connect(_on_card_click)
 
 		cards_in_chooser.append(card_in_seed_chooser) 
-		
+
+## 游戏选卡阶段时，卡片被点击
 func _on_card_click(card:Card):
 	# 如果card被选择，取消选取，后面的card向前移动
 	if card.is_choosed:
@@ -102,7 +96,7 @@ func _on_card_click(card:Card):
 	
 	# 如果没被选取，放在最后一位
 	else:
-		if len(cards) >= max_choosed_card_num:
+		if len(cards) >= main_game.max_choosed_card_num:
 			SoundManager.play_sfx("Card/Error")
 			return
 		else:
@@ -110,7 +104,7 @@ func _on_card_click(card:Card):
 			cards.append(card)
 			move_card_to(card, cards_placeholder[len(cards)-1])
 	
-# 移动card到目标点位置
+## 移动card到目标点位置
 func move_card_to(card:Card, target_parent):
 	if not current_tween_id.has(card.card_type):
 		current_tween_id[card.card_type] = 0  # 初始化为默认值
@@ -139,10 +133,13 @@ func move_card_to(card:Card, target_parent):
 			card.position = Vector2.ZERO
 	)
 
+## 卡片断开连接，游戏开始后修改点击信号连接
 func card_disconnect_card():
 	for card in cards:
 		card.card_click.disconnect(_on_card_click)
 
+
+## 移动卡槽（出现或隐藏）
 func move_card_chooser(is_appeal:bool):
 	var tween = create_tween()
 	if is_appeal:
@@ -152,6 +149,7 @@ func move_card_chooser(is_appeal:bool):
 	
 	await tween.finished
 
+## 移动待选卡槽（出现或隐藏）
 func move_card_bar(is_appeal:bool):
 	var tween = create_tween()
 	if is_appeal:
@@ -160,7 +158,4 @@ func move_card_bar(is_appeal:bool):
 		tween.tween_property(card_bar_and_shovel, "position",Vector2(13, 100.0), 0.2) # 时间可以改短点
 	
 	await tween.finished
-
-func change_z_index(z_idx=100):
-	card_bar_and_shovel.z_index = z_idx
 	

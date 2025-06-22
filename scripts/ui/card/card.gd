@@ -1,6 +1,9 @@
 extends CardBase
 class_name Card
 
+## 主游戏场景 目前用于是否为测试场景
+@onready var main_game: MainGameManager
+
 @onready var _cool_mask: ProgressBar = $ProgressBar			# 冷却进度条
 @onready var _button: Button = $Button				# 卡片点击按钮
 
@@ -9,20 +12,19 @@ var _cool_timer : float				# 冷却计时器
 
 var is_sun_enough: bool				# 阳光是否足够
 
-## 是否开始游戏
-@export var is_game := false
-## 选择卡片时被选中
+## 开局选择卡片时 是否被选中
 @export var is_choosed := false
 @export var card_in_seed_chooser:CardInSeedChooser
 ## 种植植物时发送点击信号,使用这个信号控制种植植物
 signal card_click		#点击信号
-@export var is_test:= false
+
 
 
 func _ready() -> void:
-	if is_test:
+	main_game = get_tree().current_scene
+	# 测试场景卡片直接在卡片槽中
+	if main_game.is_test:
 		super.card_init(card_type)
-		init_game_card()
 		_cool_mask.max_value = cool_time
 
 
@@ -32,12 +34,6 @@ func card_init(card_type: Global.PlantType):
 	card_in_seed_chooser = get_parent()
 	_cool_mask.max_value = cool_time
 
-
-## 游戏开始后初始化卡片
-func init_game_card():
-	is_game = true
-	_cool_mask.visible = true
-	_is_cooling = true
 	
 ## 卡片冷卻
 func _process(delta: float) -> void:

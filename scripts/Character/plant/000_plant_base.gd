@@ -13,6 +13,10 @@ var blink_timer :Timer	## 眨眼计时器
 @export_group("动画状态是否可以眨眼,is_blink才会眨眼")
 @export var is_blink := true
 
+var Label_HP := preload("res://scenes/character/label_hp.tscn")
+
+var label_hp :Label 
+signal plant_free_signal(plant_base:PlantBase)
 
 func _ready() -> void:
 	super._ready()
@@ -26,8 +30,17 @@ func _ready() -> void:
 		add_child(blink_timer)
 	# 连接 timeout 信号到函数
 	blink_timer.timeout.connect(_on_blink_timer_timeout)
-
-
+	
+	# 血量显示
+	label_hp = Label_HP.instantiate()
+	add_child(label_hp)
+	#label_hp.position = Vector2(70, 23)
+	label_hp.text = str(curr_Hp)
+	if Global.display_plant_HP_label:
+		label_hp.visible = true
+	else:
+		label_hp.visible = false
+	
 func _on_blink_timer_timeout() -> void:
 	## is_blink状态下眨眼
 	if is_blink:
@@ -64,8 +77,12 @@ func be_shovel_look_end():
 # 被攻击
 func be_attacked(attack_value:int):
 	curr_Hp -= attack_value
-	body_light()
+	label_hp.text = str(curr_Hp)
+
 	judge_status()
+	
+func be_attacked_body_light():
+	body_light()
 	
 func judge_status():
 	if curr_Hp <= 0:
@@ -73,11 +90,8 @@ func judge_status():
 
 # 植物死亡
 func _plant_free():
-	var parent = get_parent()
-	if parent is PlantCell:
-		var plantcell := parent as PlantCell
-		plantcell.is_plant = false
-		plantcell.plant = null
+	plant_free_signal.emit(self)
+	
 	self.queue_free()
 	
 # 铲掉植物

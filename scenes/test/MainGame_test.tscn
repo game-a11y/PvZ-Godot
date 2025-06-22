@@ -336,7 +336,6 @@ offset_bottom = 600.0
 mouse_filter = 2
 script = ExtResource("6_pbsx2")
 start_sun = 10000
-is_test = true
 
 [node name="CardBarAndShovel" type="HBoxContainer" parent="Camera2D/CardManager"]
 z_index = 900
@@ -377,14 +376,12 @@ layout_mode = 2
 texture = ExtResource("9_mg1sn")
 
 [node name="Card" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList/CardPlaceholder_ori" instance=ExtResource("10_j1fnf")]
-is_test = true
 
 [node name="CardPlaceholder_ori2" type="TextureRect" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList"]
 layout_mode = 2
 texture = ExtResource("9_mg1sn")
 
 [node name="Card" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList/CardPlaceholder_ori2" instance=ExtResource("10_j1fnf")]
-is_test = true
 card_type = 1
 
 [node name="CardPlaceholder_ori3" type="TextureRect" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList"]
@@ -392,7 +389,6 @@ layout_mode = 2
 texture = ExtResource("9_mg1sn")
 
 [node name="Card" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList/CardPlaceholder_ori3" instance=ExtResource("10_j1fnf")]
-is_test = true
 card_type = 2
 
 [node name="CardPlaceholder_ori4" type="TextureRect" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList"]
@@ -400,7 +396,6 @@ layout_mode = 2
 texture = ExtResource("9_mg1sn")
 
 [node name="Card" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList/CardPlaceholder_ori4" instance=ExtResource("10_j1fnf")]
-is_test = true
 card_type = 3
 
 [node name="CardPlaceholder_ori5" type="TextureRect" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList"]
@@ -408,7 +403,6 @@ layout_mode = 2
 texture = ExtResource("9_mg1sn")
 
 [node name="Card" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList/CardPlaceholder_ori5" instance=ExtResource("10_j1fnf")]
-is_test = true
 card_type = 4
 
 [node name="CardPlaceholder_ori6" type="TextureRect" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList"]
@@ -416,7 +410,6 @@ layout_mode = 2
 texture = ExtResource("9_mg1sn")
 
 [node name="Card" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList/CardPlaceholder_ori6" instance=ExtResource("10_j1fnf")]
-is_test = true
 card_type = 5
 
 [node name="CardPlaceholder_ori7" type="TextureRect" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList"]
@@ -424,7 +417,6 @@ layout_mode = 2
 texture = ExtResource("9_mg1sn")
 
 [node name="Card" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList/CardPlaceholder_ori7" instance=ExtResource("10_j1fnf")]
-is_test = true
 card_type = 6
 
 [node name="CardPlaceholder_ori8" type="TextureRect" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList"]
@@ -432,7 +424,6 @@ layout_mode = 2
 texture = ExtResource("9_mg1sn")
 
 [node name="Card" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList/CardPlaceholder_ori8" instance=ExtResource("10_j1fnf")]
-is_test = true
 card_type = 7
 
 [node name="MarginContainer" type="MarginContainer" parent="Camera2D/CardManager/CardBarAndShovel"]
@@ -742,7 +733,6 @@ offset = Vector2(-14, -70)
 
 [node name="ZombieManager" type="Node2D" parent="Manager"]
 script = ExtResource("18_i1nka")
-max_wave = 20
 
 [node name="WaveTimer" type="Timer" parent="Manager/ZombieManager"]
 one_shot = true

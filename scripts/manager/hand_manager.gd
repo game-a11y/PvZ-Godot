@@ -32,19 +32,43 @@ var new_plant_static_shadow_colum : Array
 ## 植物种植泥土粒子特效
 const PlantStartEffectScene = preload("res://scenes/character/plant/plant_start_effect.tscn")
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+
+## 墓碑场景，黑夜关卡加载
+var tombstone_scenes:PackedScene
+var is_tombstone := []
+var tombstone_num := 0
+
+## 种植的植物
+var curr_plants :Array[PlantBase]= []
+
+
+func init_plant_cells():
+
 	# 植物种植区域信号，更新植物位置列号
-	for plant_cells_row in plant_cells.get_children():
-		var plant_cells_array_row = plant_cells_row.get_children()
-		for i in range(plant_cells_array_row.size()):
-			var plant_cell = plant_cells_array_row[i]
+	for plant_cells_row_i in plant_cells.get_child_count():
+		## 某一行plant_cells
+		var plant_cells_row = plant_cells.get_child(plant_cells_row_i)
+		
+		# 创建这一行的是否有墓碑的数组
+		var is_tombstone_row := []
+		for plant_cells_col_j in plant_cells_row.get_child_count():
+			
+			var plant_cell:PlantCell = plant_cells_row.get_child(plant_cells_col_j)
 			plant_cell.click_cell.connect(_on_click_cell)
 			plant_cell.cell_mouse_enter.connect(_on_cell_mouse_enter)
 			plant_cell.cell_mouse_exit.connect(_on_cell_mouse_exit)
-			plant_cell.col = i
+			plant_cell.row_col = Vector2(plant_cells_row_i, plant_cells_col_j)
+			## 该位置没有墓碑
+			is_tombstone_row.append(false)
 			
-		plant_cells_array.append(plant_cells_array_row)
+		plant_cells_array.append(plant_cells_row.get_children())
+		
+		is_tombstone.append(is_tombstone_row)
+		
+func init_tombstone_scenes():
+	## 墓碑场景
+	tombstone_scenes = load("res://scenes/Tombstone/tombstone.tscn")
+	
 
 ## 卡片和铲子信号连接
 func card_game_signal_connect(cards:Array[Card], shovel_bg):
@@ -85,7 +109,6 @@ func _manage_new_plant_static(curr_card:Card) -> void:
 				new_node.modulate.a = 0
 				new_plant_static_shadow_colum.append(new_node)
 		
-		
 
 # 点击铲子
 func _manage_shovel() -> void:
@@ -97,13 +120,13 @@ func _manage_shovel() -> void:
 
 # 点击种植或铲掉植物
 func _on_click_cell(plant_cell:PlantCell):
-	if new_plant_static and not plant_cell.is_plant:
+	if new_plant_static and not plant_cell.is_plant and not plant_cell.is_tombstone:
 		
 		SoundManager.play_sfx("PlantCreate/Plant1")
 		
 		if main_game.mode_column:
 			for i in len(plant_cells_array):
-				var plant_cell_row_col = plant_cells_array[i][plant_cell.col]
+				var plant_cell_row_col:PlantCell = plant_cells_array[i][plant_cell.row_col.y]
 				## 如果当前cell已有植物
 				if plant_cell_row_col.is_plant:
 					continue
@@ -131,8 +154,13 @@ func _on_click_cell(plant_cell:PlantCell):
 		
 func _create_new_plant(plant_type:Global.PlantType, plant_cell:PlantCell):
 	# 创建植物
-	var new_plant = Global.PlantTypeSceneMap.get(plant_type).instantiate()
+	var new_plant :PlantBase= Global.PlantTypeSceneMap.get(plant_type).instantiate()
+	
 	plant_cell.add_child(new_plant)
+	curr_plants.append(new_plant)
+	new_plant.plant_free_signal.connect(_one_plant_free)
+	new_plant.plant_free_signal.connect(plant_cell.one_plant_free)
+	
 	new_plant.global_position = plant_cell.plant_position.global_position
 	
 	plant_cell.is_plant = true
@@ -141,17 +169,20 @@ func _create_new_plant(plant_type:Global.PlantType, plant_cell:PlantCell):
 	var plant_start_effect_scene = PlantStartEffectScene.instantiate()
 	new_plant.add_child(plant_start_effect_scene)
 
-		
+func _one_plant_free(plant:PlantBase):
+	curr_plants.erase(plant)
+	
+
 # 鼠标进入cell
 func _on_cell_mouse_enter(plant_cell:PlantCell):
 	
-	if new_plant_static and not plant_cell.is_plant:
+	if new_plant_static and not plant_cell.is_plant and not plant_cell.is_tombstone:
 		
 		new_plant_static_in_cell = true
 		
 		if main_game.mode_column:
 			# 当前cell的列
-			var curr_col = plant_cell.col
+			var curr_col = plant_cell.row_col.y
 			#对每一行cell变量，获取当前列的所有cell
 			for i in len(plant_cells_array):
 				var plant_cell_row_col:PlantCell = plant_cells_array[i][curr_col]
@@ -175,7 +206,7 @@ func _on_cell_mouse_enter(plant_cell:PlantCell):
 
 # 鼠标移出cell
 func _on_cell_mouse_exit(plant_cell:PlantCell):
-	if new_plant_static and not plant_cell.is_plant:
+	if new_plant_static:
 		if main_game.mode_column:
 			# 当前cell的列
 			#对每一行new_node变量，获取当前new_plant_static_shadow_colum的所有new_node
@@ -240,3 +271,87 @@ func _cance_shovel_or_end():
 	shovel_real.visible = false
 	card_manager.shovel_ui.visible = true
 	
+	
+#region 墓碑相关
+
+## 生成待选位置,没有墓碑的行和列
+func _candidates_position(rows:int, cols_end:int, cols_start:int=0) -> Array[Vector2i]:
+	# 构建可选位置列表
+	var candidates: Array[Vector2i]= []
+	for r in range(rows):
+		for c in range(cols_start, cols_end):
+			## 如果没有墓碑
+			if not is_tombstone[r][c]:
+				candidates.append(Vector2i(r, c))
+				
+	# 打乱顺序确保随机性
+	candidates.shuffle()
+	return candidates
+	
+## 随机生成墓碑的位置
+func _reandom_tombstone_pos(new_num:int) ->  Array[Vector2i]:
+	var rows = len(plant_cells_array)
+	var cols = len(plant_cells_array[0])
+		
+	# 如果请求的数量超过所有格子总数，就返回所有格子
+	if new_num + tombstone_num >= rows * cols:
+		var all_positions = _candidates_position(rows, cols)
+		return all_positions
+		
+	var usable_cols : int
+	## 当场上墓碑数量小于 6列 * 行数时
+	if tombstone_num < 6 * rows:
+		usable_cols = 6 
+	else:
+		usable_cols = cols
+	
+	# 构建可选位置列表
+	var candidates = _candidates_position(rows, usable_cols)
+	
+	# 取前n个作为随机选择位置
+	var selected_positions = candidates.slice(0, min(new_num, candidates.size()))
+	
+	if len(selected_positions) < new_num:
+		# 构建可选位置列表
+		var new_candidates = _candidates_position(rows, cols, usable_cols)
+		var add_pos = new_candidates.slice(0, min(new_num- len(selected_positions), new_candidates.size()))
+		
+		selected_positions.append_array(add_pos)
+	
+	return selected_positions
+
+## 创建一个墓碑
+func _create_one_tombstone(plant_cell: PlantCell, pos:Vector2i):
+	assert(not plant_cell.is_tombstone and not is_tombstone[plant_cell.row_col.x][plant_cell.row_col.y])
+	var tombstone :Node2D= tombstone_scenes.instantiate()
+	plant_cell.add_child(tombstone)
+	tombstone.position = Vector2(39,48)
+	
+	# 创建墓碑相关参数变化
+	plant_cell.is_tombstone = true
+	is_tombstone[pos.x][pos.y] = true
+	tombstone_num += 1
+
+
+## 黑夜关卡生成墓碑（生成数量，生成的最大列数，从右向左）
+func create_tombstone(new_num:int):
+	## 最大数量： 最大可生成列数 * 行数
+	## 生成随机位置
+	var selected_positions :Array[Vector2i]= _reandom_tombstone_pos(new_num)
+	for pos in selected_positions:
+		_create_one_tombstone(plant_cells_array[pos.x][pos.y], pos)
+
+#endregion
+
+
+#region UI血量相关
+## 显示植物血量
+func display_plant_HP_label():
+	if Global.display_plant_HP_label:
+		for plant in curr_plants:
+			plant.label_hp.visible = true
+	else:
+		for plant in curr_plants:
+			plant.label_hp.visible = false
+
+#endregion

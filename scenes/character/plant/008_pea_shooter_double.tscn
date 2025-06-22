@@ -73,7 +73,6 @@ fadeout_time = 0.3
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_8oku4"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_v8fse"]
-graph_offset = Vector2(-434.212, 118.079)
 nodes/Add2/node = SubResource("AnimationNodeAdd2_a2e0c")
 nodes/Add2/position = Vector2(420, 60)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_rlq0c")
@@ -108,119 +107,119 @@ position = Vector2(41, 70)
 texture = ExtResource("3_bdk7l")
 
 [node name="Backleaf" type="Sprite2D" parent="Body"]
-position = Vector2(27.7, 53.0639)
-scale = Vector2(0.557555, 0.549251)
+position = Vector2(27.6, 54.0954)
+scale = Vector2(0.576885, 0.5053)
 texture = ExtResource("3_t3qlx")
 centered = false
 
 [node name="Backleaf_left_tip" type="Sprite2D" parent="Body"]
-position = Vector2(25, 53.9639)
-rotation = 0.00334437
-scale = Vector2(0.559471, 0.551806)
+position = Vector2(24.9, 54.4977)
+rotation = 0.0347059
+scale = Vector2(0.59377, 0.523184)
 texture = ExtResource("4_yfi41")
 centered = false
 
 [node name="Backleaf_right_tip" type="Sprite2D" parent="Body"]
-position = Vector2(47.2277, 52.9639)
-scale = Vector2(0.56522, 0.551806)
+position = Vector2(47.5, 53.9908)
+rotation = 0.0190783
+scale = Vector2(0.644493, 0.523184)
 texture = ExtResource("5_51vrd")
 centered = false
 
 [node name="Stalk_bottom" type="Sprite2D" parent="Body"]
-position = Vector2(36.2916, 52.2806)
-rotation = 0.022296
-scale = Vector2(0.555639, 0.567136)
-skew = -0.00780376
+position = Vector2(37.4908, 50.1161)
+rotation = 0.144058
+scale = Vector2(0.558977, 0.68724)
+skew = -0.0486678
 texture = ExtResource("6_w5mwk")
 centered = false
 
 [node name="Stalk_top" type="Sprite2D" parent="Body"]
-position = Vector2(31.3194, 43.8309)
-rotation = 0.0200662
-scale = Vector2(0.555639, 0.604821)
-skew = -0.00891834
+position = Vector2(32.9885, 38.0115)
+rotation = 0.126766
+scale = Vector2(0.559931, 0.80947)
+skew = -0.0486279
 texture = ExtResource("7_yhffo")
 centered = false
 
 [node name="Frontleaf" type="Sprite2D" parent="Body"]
-position = Vector2(22.7361, 54.5277)
-scale = Vector2(0.557555, 0.551806)
+position = Vector2(22.4023, 55.0977)
+scale = Vector2(0.569908, 0.533115)
 texture = ExtResource("8_w3egk")
 centered = false
 
 [node name="Frontleaf_right_tip" type="Sprite2D" parent="Body"]
-position = Vector2(56.1723, 56)
-rotation = -0.0156073
-scale = Vector2(0.573523, 0.554361)
+position = Vector2(55.9023, 56.2954)
+rotation = -0.102371
+scale = Vector2(0.670332, 0.548046)
 texture = ExtResource("9_5rbbi")
 centered = false
 
 [node name="Frontleaf_tip_left" type="Sprite2D" parent="Body"]
-position = Vector2(19.3361, 61.4723)
-rotation = 0.0144921
-scale = Vector2(0.562665, 0.554361)
+position = Vector2(19.5977, 60.9046)
+rotation = 0.0953898
+scale = Vector2(0.603723, 0.548046)
 texture = ExtResource("10_fh6s4")
 centered = false
 
 [node name="Anim_stem" type="Sprite2D" parent="Body"]
-position = Vector2(37.8555, 47.6142)
+position = Vector2(39.0885, 43.5069)
 centered = false
 
 [node name="stem_correct" type="Node2D" parent="Body/Anim_stem"]
 position = Vector2(-36.5861, -47.9858)
 
 [node name="Idle_headleaf_farthest" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
-position = Vector2(13.0916, 36.7587)
-rotation = -0.2561
-scale = Vector2(0.548277, 0.512497)
-skew = -0.0659388
+position = Vector2(14.1977, 31.8069)
+rotation = 0.0743251
+scale = Vector2(0.555, 0.555)
 texture = ExtResource("11_w774x")
 centered = false
 
 [node name="Idle_headleaf_3rdfarthest" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
-position = Vector2(22.4723, 16.9335)
-rotation = -0.0379026
-scale = Vector2(0.555, 0.505775)
+position = Vector2(21.6092, 14.3977)
+rotation = -0.242898
+scale = Vector2(0.555, 0.555)
 texture = ExtResource("12_i0sbs")
 centered = false
 
 [node name="Idle_headleaf_2ndfarthest" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
-position = Vector2(11.3555, 28.3335)
-rotation = 0.0278695
-scale = Vector2(0.555, 0.505775)
+position = Vector2(12.4954, 25.1092)
+rotation = 0.170238
+scale = Vector2(0.555, 0.555)
 texture = ExtResource("16_fafux")
 centered = false
 
 [node name="Idle_headleaf_tip_bottom" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
-position = Vector2(6.26387, 32.3335)
-rotation = 0.0278695
-scale = Vector2(0.555, 0.505775)
+position = Vector2(6.8, 28.8115)
+rotation = 0.170238
+scale = Vector2(0.555, 0.555)
 texture = ExtResource("17_qax2o")
 centered = false
 
 [node name="Idle_headleaf_nearest" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
-position = Vector2(16.489, 17.9529)
-rotation = -0.0546245
-scale = Vector2(0.532749, 0.521942)
+position = Vector2(14.3115, 16.7977)
+rotation = -0.299272
+scale = Vector2(0.555, 0.555)
 texture = ExtResource("18_hnpjq")
 centered = false
 
 [node name="Idle_headleaf_tip_top" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
-position = Vector2(12.4251, 18.2723)
-rotation = -0.0546245
-scale = Vector2(0.532749, 0.521942)
+position = Vector2(10.3092, 18.0931)
+rotation = -0.299272
+scale = Vector2(0.555, 0.555)
 texture = ExtResource("19_jcmm8")
 centered = false
 
 [node name="Anim_face" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
-position = Vector2(19.2639, 16.8419)
-scale = Vector2(0.555, 0.514052)
+position = Vector2(19.3023, 12.9046)
+scale = Vector2(0.555, 0.569931)
 texture = ExtResource("20_tbq7c")
 centered = false
 
 [node name="Idle_mouth" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
-position = Vector2(52.4639, 16.778)
-scale = Vector2(0.555, 0.514052)
+position = Vector2(52.6, 12.8069)
+scale = Vector2(0.555, 0.572862)
 texture = ExtResource("21_53a1u")
 centered = false
 
@@ -229,13 +228,13 @@ centered = false
 
 [node name="Anim_blink" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
 visible = false
-position = Vector2(37.5313, 22.6441)
+position = Vector2(38.0097, 19.6594)
 scale = Vector2(0.555, 0.555)
 texture = ExtResource("19_r5oia")
 centered = false
 
 [node name="PeaShooter_eyebrow" type="Sprite2D" parent="Body/Anim_stem/stem_correct"]
-position = Vector2(34.9277, 18.9974)
+position = Vector2(35, 16.5)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("22_3hm6e")
 centered = false

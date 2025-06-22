@@ -1,7 +1,7 @@
 extends PlantBase
 class_name PeaShooterSingle
 
-@export var is_attack := false
+@export var is_attack: bool = false
 
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
 

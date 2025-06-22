@@ -12,6 +12,7 @@ var decelerate_timer: Timer  # 减速计时器
 @export var animation_origin_speed: float  # 初始动画速度
 @export var animation_speed_random: float  # 初始随机速度波动
 
+@export var is_decelerated := false
 
 # modulate 状态颜色变量
 var base_color := Color(1, 1, 1)
@@ -65,6 +66,7 @@ func be_decelerated(time_decelerate: float):
 	animation_tree.set("parameters/TimeScale/scale", animation_origin_speed * 0.5)
 	debuff_color = Color(0.4, 1, 1)
 	_update_modulate()
+	is_decelerated = true
 	start_timer_be_decelerated(time_decelerate)
 
 # 启动/重置减速计时器
@@ -79,3 +81,4 @@ func _on_timer_timeout_time_decelerate():
 	animation_tree.set("parameters/TimeScale/scale", animation_origin_speed)
 	debuff_color = Color(1, 1, 1)
 	_update_modulate()
+	is_decelerated = false

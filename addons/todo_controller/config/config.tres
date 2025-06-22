@@ -43,6 +43,7 @@ script_list_meta = {
 "res://addons/todo_controller/ui/black_bar.gd": [-1, -1],
 "res://addons/todo_controller/ui/script_rmb_panel.gd": [-1, -1],
 "res://addons/todo_controller/ui/todo_controller_panel.gd": [-1, -1],
+"res://scripts/Tombstone/tombstone.gd": [-1, -1],
 "res://scripts/autoload/global.gd": [-1, -1],
 "res://scripts/autoload/sound_manager.gd": [-1, -1],
 "res://scripts/bullet/001_bullet_pea.gd": [-1, -1],

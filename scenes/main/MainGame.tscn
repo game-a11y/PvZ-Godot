@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://dh1c6v7dpaxmd" path="res://assets/image/ui/ui_card/Shovel.png" id="4_w5iw5"]
 [ext_resource type="Script" uid="uid://cdcjkojcv1r2v" path="res://scripts/manager/zombie_manager.gd" id="5_j3aa3"]
 [ext_resource type="Script" uid="uid://c5llwle352r6f" path="res://scripts/manager/card_manager.gd" id="5_yy6tc"]
-[ext_resource type="Texture2D" uid="uid://uh50cdkqdl67" path="res://assets/image/background/background1.jpg" id="7_g5mx6"]
 [ext_resource type="Script" uid="uid://bd3w3y5b02dut" path="res://scripts/ui/main_game_ui/card_bar.gd" id="8_ifnc6"]
 [ext_resource type="Texture2D" uid="uid://hvvk2fdgo3pw" path="res://assets/image/ui/ui_card/SeedBank.png" id="8_xvvqk"]
 [ext_resource type="Texture2D" uid="uid://dw6btivnki0kt" path="res://assets/image/ui/ui_card/SeedPacketSilhouette.png" id="10_mddbc"]
@@ -24,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://daqyr7g1dgckt" path="res://assets/image/ui/ui_remind_word/StartSet.png" id="19_3tcal"]
 [ext_resource type="Script" uid="uid://c8vlhy0axw8nc" path="res://scripts/ui/main_game_ui/area_2d_home.gd" id="19_tjo6j"]
 [ext_resource type="Texture2D" uid="uid://bcv81qevn5hpt" path="res://assets/image/ui/ui_remind_word/StartPlant.png" id="20_2b7lk"]
+[ext_resource type="Texture2D" uid="uid://b3550p4p5rm2f" path="res://assets/image/background/background2.jpg" id="20_ifnc6"]
 [ext_resource type="Texture2D" uid="uid://c4jwi8yjt7hmd" path="res://assets/image/ui/ui_remind_word/Approaching.png" id="21_48j6u"]
 [ext_resource type="Texture2D" uid="uid://bp2ironyexkgp" path="res://assets/image/ui/ui_remind_word/FinalWave.png" id="22_httmh"]
 [ext_resource type="Texture2D" uid="uid://vcaw16pvdqga" path="res://assets/image/ui/ui_remind_word/ZombiesWon.png" id="23_vyo3a"]
@@ -55,6 +55,7 @@ script = ExtResource("1_7dde3")
 bgm_choose_card = ExtResource("2_8fvtd")
 bgm_main_game = ExtResource("3_tjo6j")
 mode_column = false
+game_bg = 1
 
 [node name="PlantCells" type="Node2D" parent="."]
 z_index = 200
@@ -335,7 +336,7 @@ script = ExtResource("5_yy6tc")
 start_sun = 10000
 
 [node name="CardBarAndShovel" type="HBoxContainer" parent="Camera2D/CardManager"]
-z_index = 900
+z_index = 100
 layout_mode = 0
 offset_left = 13.0
 offset_top = -94.0
@@ -666,10 +667,11 @@ offset_bottom = 40.0
 
 [node name="Manager" type="Node2D" parent="."]
 
-[node name="HamdManager" type="Node2D" parent="Manager"]
+[node name="HandManager" type="Node2D" parent="Manager"]
 script = ExtResource("3_acpf0")
+is_shovel = null
 
-[node name="Shovel" type="Sprite2D" parent="Manager/HamdManager"]
+[node name="Shovel" type="Sprite2D" parent="Manager/HandManager"]
 visible = false
 z_index = 950
 z_as_relative = false
@@ -680,7 +682,6 @@ offset = Vector2(-14, -70)
 
 [node name="ZombieManager" type="Node2D" parent="Manager"]
 script = ExtResource("5_j3aa3")
-max_wave = 20
 
 [node name="WaveTimer" type="Timer" parent="Manager/ZombieManager"]
 one_shot = true
@@ -698,9 +699,17 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 21
 text = "当前僵尸数量：0"
 
+[node name="FlagProgressBar" parent="Manager/ZombieManager" instance=ExtResource("16_dc1ex")]
+visible = false
+z_index = 1000
+offset_left = 614.0
+offset_top = 575.0
+offset_right = 614.0
+offset_bottom = 575.0
+
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(493, 0)
-texture = ExtResource("7_g5mx6")
+texture = ExtResource("20_ifnc6")
 offset = Vector2(0, 300)
 
 [node name="Area2DHome" type="Area2D" parent="Background"]
@@ -876,14 +885,6 @@ z_index = 650
 
 [node name="DaySuns" parent="." instance=ExtResource("15_w0404")]
 z_index = 800
-
-[node name="FlagProgressBar" parent="." instance=ExtResource("16_dc1ex")]
-visible = false
-z_index = 1000
-offset_left = 614.0
-offset_top = 575.0
-offset_right = 614.0
-offset_bottom = 575.0
 
 [node name="UIRemindWord" type="Control" parent="."]
 visible = false

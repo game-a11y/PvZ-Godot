@@ -5,8 +5,12 @@ class_name ZombieBase
 @export_group("僵尸基础属性")
 ## 僵尸类型
 @export var zombie_type : Global.ZombieType
-## 僵尸攻击力
-@export var attack_value := 25
+## 僵尸攻击力每帧扣血
+var frame_counter := 0
+@export var damage_per_second := 100
+var _curr_damage_per_second : int
+var _curr_plant :PlantBase
+
 ## 僵尸所在行
 @export var lane : int
 ## 僵尸所属波次
@@ -105,6 +109,7 @@ func _ready() -> void:
 	armor_first_curr_hp = armor_first_max_hp
 	armor_second_curr_hp = armor_second_max_hp
 	
+	_curr_damage_per_second = damage_per_second
 
 func _process(delta):
 	# 每帧检查射线是否碰到植物
@@ -114,7 +119,8 @@ func _process(delta):
 			var collider = ray_cast_2d.get_collider()
 			if collider is Area2D:
 			# 获取Area2D的父节点
-				var parent_node = collider.get_parent()
+				_curr_plant = collider.get_parent()
+				
 			is_walk = false
 			walking_status = WalkingStatus.end
 			is_attack = true
@@ -122,6 +128,8 @@ func _process(delta):
 		
 	else:
 		if is_attack:
+			_curr_plant = null
+			
 			is_attack = false
 			is_walk = true
 			walking_status = WalkingStatus.start
@@ -136,6 +144,24 @@ func _physics_process(delta: float) -> void:
 			_previous_ground_global_x = _ground.global_position.x
 		else:
 			_walk()
+	
+	## 如果正在攻击
+	if _curr_plant and is_attack:
+		## 每4帧扣血一次
+		frame_counter += 1
+		
+		# 每三帧植物掉血一次，被减速每6帧植物掉血一次 
+		if is_decelerated:
+			if frame_counter % 6 == 0:
+				_curr_plant.be_attacked(_curr_damage_per_second * delta * 3)
+			
+		else:
+			if frame_counter % 3 == 0:
+				_curr_plant.be_attacked(_curr_damage_per_second * delta * 3)
+			
+		# 防止过大，每 10000 帧归零（大概每 167 秒）
+		if frame_counter >= 10000:
+			frame_counter = 0
 
 
 ## 获取当前僵尸所有血量（HP+防具）
@@ -247,8 +273,6 @@ func arm1_drop():
 	arm_1_drop.acitvate_it()
 	
 
-	
-
 #endregion
 
 #region 僵尸血量改变
@@ -344,17 +368,10 @@ func _head_fade():
 #endregion
 #endregion
 
-## 僵尸啃咬一次，动画中调用
+## 僵尸啃咬一次，动画中调用,攻击音效
 func _attack_once():
-	if ray_cast_2d.is_colliding():
-		var collider = ray_cast_2d.get_collider()
-		if collider is Area2D:
-			# 获取Area2D的父节点
-			var parent_node = collider.get_parent()
-			if parent_node is PlantBase:
-				get_node("SFX/Chomp").play()
-				parent_node.be_attacked(attack_value)
-
+	get_node("SFX/Chomp").play()
+	_curr_plant.be_attacked_body_light()
 
 #region 僵尸死亡相关
 # 删除僵尸
@@ -366,6 +383,7 @@ func delete_zombie():
 func _delete_area2d():
 	if not area2d_free:
 		area2d_free = true
+		_curr_damage_per_second = 0
 		
 		var zombie_all_hp = get_zombie_all_hp()
 		zombie_damaged.emit(zombie_all_hp, curr_wave)

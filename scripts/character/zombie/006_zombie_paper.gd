@@ -10,5 +10,6 @@ func arm2_drop():
 	
 
 func _gasp_end():
+	_curr_damage_per_second = damage_per_second * 2
 	$Body/Anim_head_look.visible = false
 	$Body/Anim_head_pupils.visible = false

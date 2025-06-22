@@ -29,7 +29,8 @@ func _on_check_box_3_toggled(toggled_on: bool) -> void:
 	Global.disappear_spare_card_Placeholder = toggled_on
 	
 	Global.save_config()
-	if main_game.start_game:
+	## 游戏阶段时隐藏多余卡片
+	if main_game.main_game_progress == main_game.MainGameProgress.MAIN_GAME:
 		card_manager.judge_disappear_add_card_bar()
 
 
@@ -46,3 +47,11 @@ func _on_texture_button_pressed() -> void:
 
 func appear_canvas_layer_control() -> void:
 	visible = true
+
+
+func _on_check_box_5_toggled(toggled_on: bool) -> void:
+	Global.display_plant_HP_label = toggled_on
+	
+	Global.save_config()
+	main_game.display_plant_HP_label()
+	
