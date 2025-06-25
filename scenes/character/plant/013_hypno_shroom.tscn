@@ -62,29 +62,29 @@ position = Vector2(41, 70)
 texture = ExtResource("2_lusfa")
 
 [node name="Layer 1" type="Sprite2D" parent="Body"]
-position = Vector2(20.5029, 38.0913)
-scale = Vector2(0.846798, 0.757173)
+position = Vector2(20.2576, 38.5697)
+scale = Vector2(0.85597, 0.748454)
 texture = ExtResource("0_fuck")
 centered = false
 
 [node name="Layer 3" type="Sprite2D" parent="Body"]
-position = Vector2(35, 51.8942)
+position = Vector2(35, 52.1849)
 rotation = 6.28318
-scale = Vector2(0.827798, 0.642173)
+scale = Vector2(0.83697, 0.634878)
 texture = ExtResource("2_fuck")
 centered = false
 
 [node name="Layer 2" type="Sprite2D" parent="Body"]
-position = Vector2(10.2115, 2.57691)
-scale = Vector2(0.848625, 0.795173)
+position = Vector2(9.53027, 3.92433)
+scale = Vector2(0.866516, 0.785454)
 texture = ExtResource("3_fuck")
 centered = false
 
 [node name="Layer 4" type="Sprite2D" parent="Body"]
-position = Vector2(54.8942, 50.3913)
-rotation = -3.45934
-scale = Vector2(0.515885, 0.500087)
-skew = -3.21121
+position = Vector2(55, 50.6697)
+rotation = -3.45105
+scale = Vector2(0.520273, 0.495727)
+skew = -3.22981
 texture = ExtResource("2_fuck")
 centered = false
 

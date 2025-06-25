@@ -23,6 +23,9 @@ func stop_sleep():
 
 func be_eated_once(zombie:ZombieBase):
 	if not is_eated:
+		if zombie.area2d_free:
+			return
+		
 		is_eated = true
 		zombie.be_hypnotized()
 

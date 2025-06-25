@@ -35,14 +35,21 @@ func start_attack_loop():
 
 	attack_timer.start()
 
-# 停止攻击
+# 停止攻击,
+#TODO: 有可能不停止，不知道原因，时间结束回调函数进行重复判定
 func stop_attack_loop():
 	attack_timer.stop()
 
 # 每次触发执行攻击
 func _on_attack_timer_timeout():
-	animation_tree.set("parameters/OneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	# 在这里调用实际攻击逻辑
+	if not is_attack:
+		attack_timer.stop()
+		return
+		
+	animation_tree.set("parameters/OneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	
+	
 
 func _process(delta):
 	# 每帧检查射线是否碰到僵尸

@@ -2056,8 +2056,8 @@ offset_right = 174.0
 offset_bottom = 151.0
 text = "没做"
 
-[connection signal="pressed" from="BG_Right/Menu/Button1" to="." method="_on_menu_button_1_pressed"]
 [connection signal="pressed" from="BG_Right/Menu/Button1" to="." method="_on_button_1_pressed"]
+[connection signal="pressed" from="BG_Right/Menu/Button1" to="." method="_on_menu_button_1_pressed"]
 [connection signal="pressed" from="BG_Right/Menu/Button2" to="Dialog" method="appear_dialog"]
 [connection signal="pressed" from="BG_Right/Menu/Button3" to="Dialog" method="appear_dialog"]
 [connection signal="pressed" from="BG_Right/Menu/Button4" to="Dialog" method="appear_dialog"]
