@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://cu0wuqktyhssa"]
+[gd_scene load_steps=46 format=3 uid="uid://cu0wuqktyhssa"]
 
 [ext_resource type="Animation" uid="uid://eg5i0srekcuo" path="res://animation/character/plant/003_cherry_bomb/CherryBomb_explode.tres" id="1_anim"]
 [ext_resource type="Script" uid="uid://b7vg4ofxajdtb" path="res://scripts/character/plant/003_cherry_bomb.gd" id="1_fj2s8"]
@@ -70,18 +70,11 @@ size = Vector2(50, 60)
 size = Vector2(250, 200)
 
 [sub_resource type="Curve" id="Curve_sobky"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.456044, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.456044, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -6.4015, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_wh83y"]
+[sub_resource type="CurveTexture" id="CurveTexture_xru78"]
 curve = SubResource("Curve_sobky")
-
-[sub_resource type="Curve" id="Curve_ha0u2"]
-_data = [Vector2(0, 0.134832), 0.0, 0.0, 0, 0, Vector2(0.466667, 0.191011), -0.346028, -0.346028, 0, 0, Vector2(1, 0), -0.815731, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_cjc23"]
-curve = SubResource("Curve_ha0u2")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sobky"]
 particle_flag_disable_z = true
@@ -93,33 +86,34 @@ emission_ring_inner_radius = 60.0
 emission_ring_cone_angle = 90.0
 angular_velocity_min = 189.47
 angular_velocity_max = 189.47
-radial_velocity_min = 50.0
-radial_velocity_max = 94.07
+radial_velocity_min = 30.0
+radial_velocity_max = 70.0
 gravity = Vector3(0, 0, 0)
 attractor_interaction_enabled = false
-scale_curve = SubResource("CurveTexture_cjc23")
-alpha_curve = SubResource("CurveTexture_wh83y")
+scale_min = 0.1
+scale_max = 0.3
+alpha_curve = SubResource("CurveTexture_xru78")
 
 [sub_resource type="Curve" id="Curve_gijk3"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.582418, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_ha0u2"]
+[sub_resource type="CurveTexture" id="CurveTexture_p5gqp"]
 curve = SubResource("Curve_gijk3")
 
 [sub_resource type="Curve" id="Curve_cjc23"]
 _limits = [-1.0, 1.0, 0.0, 1.0]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.510989, -1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.510989, -1), 0.0, 0.0, 0, 0, Vector2(1, -0.985075), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_sobky"]
+[sub_resource type="CurveTexture" id="CurveTexture_svbgh"]
 curve = SubResource("Curve_cjc23")
 
 [sub_resource type="Curve" id="Curve_hfb7l"]
 _data = [Vector2(0, 0.696629), 0.0, 0.0, 0, 0, Vector2(0.494505, 1), 0.0, 0.0, 0, 0, Vector2(0.972528, 0.247191), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_mlr0j"]
+[sub_resource type="CurveTexture" id="CurveTexture_3oaqw"]
 curve = SubResource("Curve_hfb7l")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q257l"]
@@ -128,19 +122,20 @@ emission_shape = 1
 emission_sphere_radius = 50.0
 angular_velocity_min = -1.60933e-05
 angular_velocity_max = 91.64
-angular_velocity_curve = SubResource("CurveTexture_sobky")
+angular_velocity_curve = SubResource("CurveTexture_svbgh")
 radial_velocity_min = -2.23517e-05
 radial_velocity_max = 50.0
 gravity = Vector3(0, 0, 0)
 attractor_interaction_enabled = false
 scale_min = 0.0
-scale_curve = SubResource("CurveTexture_mlr0j")
+scale_curve = SubResource("CurveTexture_3oaqw")
 color = Color(0.917647, 0.756863, 0, 1)
-alpha_curve = SubResource("CurveTexture_ha0u2")
+alpha_curve = SubResource("CurveTexture_p5gqp")
 
 [node name="CherryBomb" type="Node2D" node_paths=PackedStringArray("SFX_bomb")]
 script = ExtResource("1_fj2s8")
 SFX_bomb = NodePath("Cherrybomb")
+no_blink = true
 
 [node name="Cherrybomb" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("24_xulih")

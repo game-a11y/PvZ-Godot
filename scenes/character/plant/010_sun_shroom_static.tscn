@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://d437plgu303"]
+
+[ext_resource type="Texture2D" uid="uid://d3fiedp7rmj02" path="res://assets/reanim/SunShroom_body.png" id="5_ngjpy"]
+[ext_resource type="Texture2D" uid="uid://2kxhbashy85l" path="res://assets/reanim/SunShroom_sleep.png" id="6_3efk2"]
+[ext_resource type="Texture2D" uid="uid://cwpdbv6tcn38g" path="res://assets/reanim/SunShroom_head.png" id="7_7j8iv"]
+
+[node name="SunShroom" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-41, -49)
+
+[node name="Anim_face" type="Sprite2D" parent="Body"]
+position = Vector2(30.9177, 48.1234)
+scale = Vector2(0.375468, 0.345532)
+texture = ExtResource("5_ngjpy")
+centered = false
+
+[node name="Anim_sleep1" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(36.7177, 51.0411)
+rotation = 0.0108808
+scale = Vector2(0.395113, 0.351064)
+skew = -0.0108808
+texture = ExtResource("6_3efk2")
+centered = false
+
+[node name="Anim_blink" type="Sprite2D" parent="Body"]
+visible = false
+self_modulate = Color(0, 0, 0, 1)
+position = Vector2(37.1, 50.7854)
+scale = Vector2(1e-05, 1e-05)
+centered = false
+
+[node name="SunShroom_head" type="Sprite2D" parent="Body"]
+position = Vector2(24.7532, 29.0113)
+rotation = 0.07854
+scale = Vector2(0.379702, 0.333475)
+texture = ExtResource("7_7j8iv")
+centered = false

@@ -1,7 +1,6 @@
 extends PlantBase
 class_name SunFlower
-
-@onready var production_timer: Timer = $Timer
+@onready var production_timer: Timer = $ProductionTimer
 @export var sun_scene: PackedScene
 
 @export var production_interval: float  # 生产间隔(秒)
@@ -9,6 +8,10 @@ class_name SunFlower
 @onready var sun: Node2D = $Sun
 # 阳光交互，将生产阳光放到DaySuns下，不然会被植物的button按钮挡住
 @export var day_suns:DaySuns
+## 生产阳光价值
+@export var sun_value := 25
+
+
 
 func _ready():
 	super._ready()
@@ -30,7 +33,10 @@ func spawn_sun():
 	
 	var new_sun = sun_scene.instantiate()
 	if new_sun is Sun:
+		
 		day_suns.add_child(new_sun)
+		new_sun.sun_value = sun_value
+		new_sun._sun_scale(sun_value)
 		# 控制阳光下落
 		var tween = get_tree().create_tween()
 		new_sun.global_position = sun.global_position

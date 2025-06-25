@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://bvi10sgqlk1tb"]
+
+[ext_resource type="Texture2D" uid="uid://b5v5vannbipgc" path="res://assets/reanim/FumeShroom_body.png" id="1_qrfef"]
+[ext_resource type="Texture2D" uid="uid://bdecyr5u832mx" path="res://assets/reanim/FumeShroom_head.png" id="3_o2trh"]
+[ext_resource type="Texture2D" uid="uid://cvjt2bbvgatgh" path="res://assets/reanim/FumeShroom_blink1.png" id="3_xc0ny"]
+[ext_resource type="Texture2D" uid="uid://b8hsdl8m0la2k" path="res://assets/reanim/FumeShroom_spout.png" id="4_m48qo"]
+[ext_resource type="Texture2D" uid="uid://dlwrjkajjpdsb" path="res://assets/reanim/FumeShroom_tip.png" id="5_ksfvm"]
+[ext_resource type="Texture2D" uid="uid://yjc7pkf5hdn2" path="res://assets/image/particles/bullet/PuffShroom_puff1.png" id="10_x072o"]
+
+[node name="FumeShroom" type="Node2D"]
+scale = Vector2(0.4, 0.4)
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-42, -46)
+
+[node name="Anim_sleep" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Anim_shooting" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Anim_idle" type="Sprite2D" parent="Body"]
+centered = false
+
+[node name="Anim_face" type="Sprite2D" parent="Body"]
+position = Vector2(9.8, 38.4)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_qrfef")
+centered = false
+
+[node name="DoomShroom_eyes" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Anim_blink" type="Sprite2D" parent="Body"]
+visible = false
+modulate = Color(1, 1, 1, 0.513726)
+position = Vector2(43, 50)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_xc0ny")
+centered = false
+
+[node name="DoomShroom_head" type="Sprite2D" parent="Body"]
+position = Vector2(5.3, -2.7)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_o2trh")
+centered = false
+
+[node name="DoomShroom_spout" type="Sprite2D" parent="Body"]
+position = Vector2(67.8, 16.4)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4_m48qo")
+centered = false
+
+[node name="DoomShroom_tip" type="Sprite2D" parent="Body"]
+position = Vector2(74.1, 14.2)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("5_ksfvm")
+centered = false
+
+[node name="PuffShroomPuff1" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(85, 25)
+scale = Vector2(0.5, 0.592593)
+texture = ExtResource("10_x072o")

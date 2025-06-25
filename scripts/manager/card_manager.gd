@@ -48,7 +48,7 @@ func _ready() -> void:
 ## 测试场景直接对卡片获取卡片列表
 func test_scenes_init_cards():
 	for card_placeholder in card_ui_list.get_children():
-			cards.append(card_placeholder.get_node("Card"))
+		cards.append(card_placeholder.get_node("Card"))
 
 	
 ## 初始化出战卡槽

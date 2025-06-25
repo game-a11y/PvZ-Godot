@@ -1,0 +1,168 @@
+[gd_scene load_steps=26 format=3 uid="uid://dvrnqpyyjgdt"]
+
+[ext_resource type="Texture2D" uid="uid://3a0yexorxcsk" path="res://assets/reanim/IceShroom_body.png" id="0_fuck"]
+[ext_resource type="Animation" uid="uid://bv1w6c5kxvxdu" path="res://animation/character/plant/015_ice_shroom/IceShroom_idle.tres" id="1_anim"]
+[ext_resource type="Texture2D" uid="uid://c213mmlt125el" path="res://assets/reanim/IceShroom_base.png" id="1_fuck"]
+[ext_resource type="Script" uid="uid://byeyumxg7gxg5" path="res://scripts/character/plant/015_ice_shroom.gd" id="1_ju8vi"]
+[ext_resource type="Animation" uid="uid://bg3t1o4lre152" path="res://animation/character/plant/015_ice_shroom/IceShroom_sleep.tres" id="2_anim"]
+[ext_resource type="Texture2D" uid="uid://502erh735gni" path="res://assets/reanim/IceShroom_blink2.png" id="2_fuck"]
+[ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="2_hkwun"]
+[ext_resource type="Texture2D" uid="uid://dhb33lor5gb5w" path="res://assets/reanim/IceShroom_blink1.png" id="3_fuck"]
+[ext_resource type="Texture2D" uid="uid://cco82p2wd1ql4" path="res://assets/reanim/IceShroom_head.png" id="4_fuck"]
+[ext_resource type="PackedScene" uid="uid://dk13yxwm7s2j8" path="res://scenes/character/plant/sleep_shroom_base.tscn" id="10_sa70k"]
+[ext_resource type="Texture2D" uid="uid://bifx1ttlwu3bw" path="res://assets/image/particles/bullet/SnowFlakes.png" id="11_vpvam"]
+[ext_resource type="Script" uid="uid://dxi6nxsnre1w8" path="res://scripts/fx/bomb_effect/000_bomb_effect_base.gd" id="12_4kgfq"]
+[ext_resource type="AudioStream" uid="uid://1emodkbeeuqw" path="res://assets/audio/SFX/plant/frozen.ogg" id="13_4kgfq"]
+
+[sub_resource type="Animation" id="Animation_hkwun"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/Anim_blink:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(27, 41)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_euprm"]
+_data = {
+&"IceShroom_idle": ExtResource("1_anim"),
+&"IceShroom_sleep": ExtResource("2_anim"),
+&"RESET": SubResource("Animation_hkwun")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2xsdr"]
+animation = &"IceShroom_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_edbt1"]
+animation = &"IceShroom_sleep"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sxd4y"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hkwun"]
+advance_mode = 2
+advance_expression = "not is_sleep"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_fc1ok"]
+states/IceShroom_idle/node = SubResource("AnimationNodeAnimation_2xsdr")
+states/IceShroom_idle/position = Vector2(603, 93)
+states/IceShroom_sleep/node = SubResource("AnimationNodeAnimation_edbt1")
+states/IceShroom_sleep/position = Vector2(401, 93)
+transitions = ["Start", "IceShroom_sleep", SubResource("AnimationNodeStateMachineTransition_sxd4y"), "IceShroom_sleep", "IceShroom_idle", SubResource("AnimationNodeStateMachineTransition_hkwun")]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_sa70k"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_yrlom"]
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_fc1ok")
+nodes/StateMachine/position = Vector2(400, 140)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_sa70k")
+nodes/TimeScale/position = Vector2(700, 140)
+nodes/output/position = Vector2(940, 160)
+node_connections = [&"TimeScale", 0, &"StateMachine", &"output", 0, &"TimeScale"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fc1ok"]
+size = Vector2(50, 60)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bgvgt"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1kc8l"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(50, 50, 1)
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(0, -1, 0)
+spread = 50.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 98, 0)
+scale_max = 3.0
+
+[node name="IceShroom" type="Node2D" node_paths=PackedStringArray("SFX_bomb", "blink_sprite")]
+script = ExtResource("1_ju8vi")
+SFX_bomb = NodePath("Frozen")
+blink_sprite = NodePath("Body/Anim_blink")
+blink_sprite_texture = Array[Texture]([ExtResource("3_fuck"), ExtResource("2_fuck")])
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-39, -40)
+
+[node name="shadow" type="Sprite2D" parent="Body"]
+position = Vector2(41, 70)
+texture = ExtResource("2_hkwun")
+
+[node name="Anim_face" type="Sprite2D" parent="Body"]
+position = Vector2(13.7, 38.1)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("0_fuck")
+centered = false
+
+[node name="IceShroom_base" type="Sprite2D" parent="Body"]
+position = Vector2(8.5, 60.1)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_fuck")
+centered = false
+
+[node name="Anim_sleep1" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Anim_blink" type="Sprite2D" parent="Body"]
+visible = false
+modulate = Color(1, 1, 1, 0.360784)
+position = Vector2(27, 41)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_fuck")
+centered = false
+
+[node name="IceShroom_head" type="Sprite2D" parent="Body"]
+position = Vector2(-1.4, 1.5)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4_fuck")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_euprm")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_yrlom")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/TimeScale/scale = 1.0
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_fc1ok")
+
+[node name="SleepShroom" parent="." instance=ExtResource("10_sa70k")]
+
+[node name="BombEffect" type="Node2D" parent="."]
+script = ExtResource("12_4kgfq")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="BombEffect"]
+material = SubResource("CanvasItemMaterial_bgvgt")
+emitting = false
+texture = ExtResource("11_vpvam")
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_1kc8l")
+
+[node name="Frozen" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_4kgfq")
+bus = &"SFX"

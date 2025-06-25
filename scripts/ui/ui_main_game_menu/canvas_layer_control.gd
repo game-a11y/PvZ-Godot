@@ -8,14 +8,16 @@ class_name ControlCanvasLayer
 @onready var check_box_2: CheckBox = $OptionBG/HBoxContainer/VBoxContainer/CheckBox2
 @onready var check_box_3: CheckBox = $OptionBG/HBoxContainer/VBoxContainer/CheckBox3
 @onready var check_box_4: CheckBox = $OptionBG/HBoxContainer/VBoxContainer/CheckBox4
+@onready var check_box_5: CheckBox = $OptionBG/HBoxContainer/VBoxContainer/CheckBox5
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+## 初始化控制台
+func init_control_panel():
 	Global.load_config()
 	check_box.button_pressed = Global.auto_collect_sun
 	check_box_2.button_pressed = Global.auto_collect_coin
 	check_box_3.button_pressed = Global.disappear_spare_card_Placeholder
 	check_box_4.button_pressed = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
+	check_box_5.button_pressed = Global.display_plant_HP_label
 
 
 ## 自动收集阳光
@@ -54,4 +56,10 @@ func _on_check_box_5_toggled(toggled_on: bool) -> void:
 	
 	Global.save_config()
 	main_game.display_plant_HP_label()
+	
+func _on_check_box_6_toggled(toggled_on: bool) -> void:
+	Global.display_zombie_HP_label = toggled_on
+	
+	Global.save_config()
+	main_game.display_zombie_HP_label()
 	

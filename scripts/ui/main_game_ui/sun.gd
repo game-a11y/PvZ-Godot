@@ -9,13 +9,17 @@ var collected := false  # 是否已被点击收集
 
 func _ready() -> void:
 	card_manager = get_tree().current_scene.get_node("Camera2D/CardManager")
-		# 启动一个10秒定时器
+	# 启动一个10秒定时器
 	await get_tree().create_timer(exist_time).timeout
 	
 	# 如果还没被点击收集，自动销毁
 	if not collected and is_instance_valid(self):
 		_start_fade_out()
 	
+func _sun_scale(new_sun_value:int):
+	var new_scale = new_sun_value/25.0
+	scale = Vector2(new_scale,new_scale)
+
 
 func _on_button_pressed() -> void:
 	if collected:

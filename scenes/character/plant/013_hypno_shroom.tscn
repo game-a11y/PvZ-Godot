@@ -1,0 +1,114 @@
+[gd_scene load_steps=19 format=3 uid="uid://buxcqqq76ff77"]
+
+[ext_resource type="Texture2D" uid="uid://cbgu3a2jxkthd" path="res://assets/reanim/HypnoShroom_body.png" id="0_fuck"]
+[ext_resource type="Animation" uid="uid://dty7dbaeyuw0t" path="res://animation/character/plant/013_hypno_shroom/HypnoShroom_idle.tres" id="1_anim"]
+[ext_resource type="Script" uid="uid://cfxet1kd2felb" path="res://scripts/character/plant/013_hypno_shroom.gd" id="1_j1xgq"]
+[ext_resource type="Animation" uid="uid://30e20p4vcyww" path="res://animation/character/plant/013_hypno_shroom/HypnoShroom_sleep.tres" id="2_anim"]
+[ext_resource type="Texture2D" uid="uid://yvo3ejjv80nt" path="res://assets/reanim/HypnoShroom_sleepeye.png" id="2_fuck"]
+[ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="2_lusfa"]
+[ext_resource type="Texture2D" uid="uid://c3tp56xwnaj8k" path="res://assets/reanim/HypnoShroom_head.png" id="3_fuck"]
+[ext_resource type="PackedScene" uid="uid://dk13yxwm7s2j8" path="res://scenes/character/plant/sleep_shroom_base.tscn" id="9_hrt0k"]
+[ext_resource type="AudioStream" uid="uid://27ixpiivbgde" path="res://assets/audio/SFX/plant/mindcontrolled.ogg" id="9_lusfa"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ih1jw"]
+_data = {
+&"HypnoShroom_idle": ExtResource("1_anim"),
+&"HypnoShroom_sleep": ExtResource("2_anim")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xmls6"]
+animation = &"HypnoShroom_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lusfa"]
+animation = &"HypnoShroom_sleep"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hrt0k"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1dxyp"]
+advance_mode = 2
+advance_expression = "not is_sleep"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_7ns8a"]
+states/HypnoShroom_idle/node = SubResource("AnimationNodeAnimation_xmls6")
+states/HypnoShroom_idle/position = Vector2(406, 59)
+states/HypnoShroom_sleep/node = SubResource("AnimationNodeAnimation_lusfa")
+states/HypnoShroom_sleep/position = Vector2(398, 189)
+transitions = ["Start", "HypnoShroom_sleep", SubResource("AnimationNodeStateMachineTransition_hrt0k"), "HypnoShroom_sleep", "HypnoShroom_idle", SubResource("AnimationNodeStateMachineTransition_1dxyp")]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_0ou06"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_5dss5"]
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_7ns8a")
+nodes/StateMachine/position = Vector2(40, 80)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_0ou06")
+nodes/TimeScale/position = Vector2(362, 83)
+nodes/output/position = Vector2(580, 120)
+node_connections = [&"TimeScale", 0, &"StateMachine", &"output", 0, &"TimeScale"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1dxyp"]
+size = Vector2(50, 60)
+
+[node name="HypnoShroom" type="Node2D" node_paths=PackedStringArray("SFX_bomb")]
+script = ExtResource("1_j1xgq")
+SFX_bomb = NodePath("Mindcontrolled")
+no_blink = true
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-37, -45)
+
+[node name="shadow" type="Sprite2D" parent="Body"]
+position = Vector2(41, 70)
+texture = ExtResource("2_lusfa")
+
+[node name="Layer 1" type="Sprite2D" parent="Body"]
+position = Vector2(20.5029, 38.0913)
+scale = Vector2(0.846798, 0.757173)
+texture = ExtResource("0_fuck")
+centered = false
+
+[node name="Layer 3" type="Sprite2D" parent="Body"]
+position = Vector2(35, 51.8942)
+rotation = 6.28318
+scale = Vector2(0.827798, 0.642173)
+texture = ExtResource("2_fuck")
+centered = false
+
+[node name="Layer 2" type="Sprite2D" parent="Body"]
+position = Vector2(10.2115, 2.57691)
+scale = Vector2(0.848625, 0.795173)
+texture = ExtResource("3_fuck")
+centered = false
+
+[node name="Layer 4" type="Sprite2D" parent="Body"]
+position = Vector2(54.8942, 50.3913)
+rotation = -3.45934
+scale = Vector2(0.515885, 0.500087)
+skew = -3.21121
+texture = ExtResource("2_fuck")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ih1jw")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_5dss5")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/TimeScale/scale = 1.0
+
+[node name="SleepShroom" parent="." instance=ExtResource("9_hrt0k")]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_1dxyp")
+
+[node name="Mindcontrolled" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_lusfa")
+bus = &"SFX"

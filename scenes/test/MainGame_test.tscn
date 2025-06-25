@@ -1,47 +1,53 @@
-[gd_scene load_steps=43 format=3 uid="uid://c5y7t637l6iw5"]
+[gd_scene load_steps=49 format=3 uid="uid://ckkuxfqw7arms"]
 
-[ext_resource type="Script" uid="uid://c7dr2016dfdoo" path="res://scripts/manager/main_game_manager.gd" id="1_ohie6"]
-[ext_resource type="AudioStream" uid="uid://duvijencyf7mi" path="res://assets/audio/BGM/choose_card.mp3" id="2_v56hd"]
-[ext_resource type="AudioStream" uid="uid://cypqibotos5mp" path="res://assets/audio/BGM/first.mp3" id="3_iq302"]
-[ext_resource type="PackedScene" uid="uid://brnfbv2sxv2qh" path="res://scenes/ui/plant_cell.tscn" id="4_6mjp7"]
-[ext_resource type="Script" uid="uid://dhkfw0onmxcyf" path="res://scripts/camera/main_game_camera.gd" id="5_8ink4"]
-[ext_resource type="Script" uid="uid://c5llwle352r6f" path="res://scripts/manager/card_manager.gd" id="6_pbsx2"]
-[ext_resource type="Texture2D" uid="uid://hvvk2fdgo3pw" path="res://assets/image/ui/ui_card/SeedBank.png" id="7_jqayl"]
-[ext_resource type="Script" uid="uid://bd3w3y5b02dut" path="res://scripts/ui/main_game_ui/card_bar.gd" id="8_r6cme"]
-[ext_resource type="Texture2D" uid="uid://dw6btivnki0kt" path="res://assets/image/ui/ui_card/SeedPacketSilhouette.png" id="9_mg1sn"]
-[ext_resource type="PackedScene" uid="uid://cjuiaaq33o5aa" path="res://scenes/ui/card.tscn" id="10_j1fnf"]
-[ext_resource type="Texture2D" uid="uid://47ixd5hsddft" path="res://assets/image/ui/ui_card/ShovelBank.png" id="10_oafhf"]
-[ext_resource type="Script" uid="uid://drl7ywtxslsbm" path="res://scripts/ui/card/shovel_in_ui.gd" id="11_e6ewp"]
-[ext_resource type="Texture2D" uid="uid://dh1c6v7dpaxmd" path="res://assets/image/ui/ui_card/Shovel.png" id="12_l5djx"]
-[ext_resource type="Texture2D" uid="uid://bgy071auro307" path="res://assets/image/ui/ui_card/all_card/SeedChooser_Background.png" id="13_7mdi3"]
-[ext_resource type="Texture2D" uid="uid://b1fuu1s6nfxnq" path="res://assets/image/ui/ui_card/all_card/SeedChooser_Button_Glow.png" id="14_ovtx8"]
-[ext_resource type="Texture2D" uid="uid://gy84wwo8bimw" path="res://assets/image/ui/ui_card/all_card/SeedChooser_Button_Glow2.png" id="15_hn2o2"]
-[ext_resource type="Script" uid="uid://parybxg7tb1k" path="res://scripts/ui/PVZ_button_base.gd" id="16_e60wv"]
-[ext_resource type="Script" uid="uid://b2rst408m72au" path="res://scripts/manager/hand_manager.gd" id="17_nl67b"]
-[ext_resource type="Script" uid="uid://cdcjkojcv1r2v" path="res://scripts/manager/zombie_manager.gd" id="18_i1nka"]
-[ext_resource type="Texture2D" uid="uid://uh50cdkqdl67" path="res://assets/image/background/background1.jpg" id="19_j14ba"]
-[ext_resource type="Script" uid="uid://c8vlhy0axw8nc" path="res://scripts/ui/main_game_ui/area_2d_home.gd" id="20_l1gsm"]
-[ext_resource type="Theme" uid="uid://em12la0rqibq" path="res://PVZ_theme.tres" id="21_wsn6s"]
-[ext_resource type="PackedScene" uid="uid://c8bd2m73sdwhf" path="res://scenes/item/game_scenes_item/day_suns.tscn" id="22_hd6sf"]
-[ext_resource type="PackedScene" uid="uid://brbdbxg2tocla" path="res://scenes/ui/flag_progress_bar.tscn" id="23_dnvqr"]
-[ext_resource type="PackedScene" uid="uid://dajgv0lrme2e5" path="res://scenes/character/zombie/001_zombie_norm.tscn" id="23_m74em"]
-[ext_resource type="Script" uid="uid://cyutow4qwsjq5" path="res://scripts/ui/main_game_ui/ui_remind_word.gd" id="24_ct03v"]
-[ext_resource type="Texture2D" uid="uid://bll1o67ycmid6" path="res://assets/image/ui/ui_remind_word/StartReady.png" id="25_fl42k"]
-[ext_resource type="Texture2D" uid="uid://daqyr7g1dgckt" path="res://assets/image/ui/ui_remind_word/StartSet.png" id="26_1m2bq"]
-[ext_resource type="Texture2D" uid="uid://bcv81qevn5hpt" path="res://assets/image/ui/ui_remind_word/StartPlant.png" id="27_w83rw"]
-[ext_resource type="Texture2D" uid="uid://c4jwi8yjt7hmd" path="res://assets/image/ui/ui_remind_word/Approaching.png" id="28_wh8vx"]
-[ext_resource type="Texture2D" uid="uid://bp2ironyexkgp" path="res://assets/image/ui/ui_remind_word/FinalWave.png" id="29_siqmm"]
-[ext_resource type="Texture2D" uid="uid://vcaw16pvdqga" path="res://assets/image/ui/ui_remind_word/ZombiesWon.png" id="30_s0ea2"]
-[ext_resource type="Script" uid="uid://3j46ottso760" path="res://scripts/ui/main_game_ui/main_game_menu_button.gd" id="31_at8lp"]
-[ext_resource type="Texture2D" uid="uid://toxyk2jadqam" path="res://assets/image/ui/ui_main_game_menu/option_dialog.png" id="32_y7v2f"]
-[ext_resource type="Script" uid="uid://djkmy1xylm8hs" path="res://scripts/ui/ui_main_game_menu/main_game_menu_option_dialog.gd" id="33_8lx13"]
-[ext_resource type="PackedScene" uid="uid://5v0fdtao52jl" path="res://scenes/main/control_canvas_layer.tscn" id="34_kb45x"]
-[ext_resource type="Texture2D" uid="uid://blge6mwmus5fv" path="res://assets/image/ui/ui_main_game_menu/btn_dialog_back_2.png" id="35_dr4hc"]
-[ext_resource type="BitMap" uid="uid://bhg7gejfpw036" path="res://assets/image/ui/ui_main_game_menu/btn_dialog_back_2_mask.png" id="36_8kjc2"]
-[ext_resource type="PackedScene" uid="uid://cp0kgnsx20pyh" path="res://scenes/ui/dialog.tscn" id="37_l00cp"]
+[ext_resource type="Script" uid="uid://c7dr2016dfdoo" path="res://scripts/manager/main_game_manager.gd" id="1_2hh43"]
+[ext_resource type="AudioStream" uid="uid://duvijencyf7mi" path="res://assets/audio/BGM/choose_card.mp3" id="2_11mrt"]
+[ext_resource type="AudioStream" uid="uid://cypqibotos5mp" path="res://assets/audio/BGM/front_day.mp3" id="3_rhi2v"]
+[ext_resource type="PackedScene" uid="uid://brnfbv2sxv2qh" path="res://scenes/ui/plant_cell.tscn" id="4_k85g3"]
+[ext_resource type="PackedScene" uid="uid://dv5fiu4pkryba" path="res://scenes/item/game_scenes_item/lawn_mower.tscn" id="5_j6qim"]
+[ext_resource type="Script" uid="uid://dhkfw0onmxcyf" path="res://scripts/camera/main_game_camera.gd" id="6_pbnrj"]
+[ext_resource type="Script" uid="uid://c5llwle352r6f" path="res://scripts/manager/card_manager.gd" id="7_cimig"]
+[ext_resource type="Texture2D" uid="uid://hvvk2fdgo3pw" path="res://assets/image/ui/ui_card/SeedBank.png" id="8_g1dp7"]
+[ext_resource type="Script" uid="uid://bd3w3y5b02dut" path="res://scripts/ui/main_game_ui/card_bar.gd" id="9_awk1m"]
+[ext_resource type="Texture2D" uid="uid://dw6btivnki0kt" path="res://assets/image/ui/ui_card/SeedPacketSilhouette.png" id="10_800aw"]
+[ext_resource type="Texture2D" uid="uid://47ixd5hsddft" path="res://assets/image/ui/ui_card/ShovelBank.png" id="11_dfggp"]
+[ext_resource type="PackedScene" uid="uid://cjuiaaq33o5aa" path="res://scenes/ui/card.tscn" id="11_sus73"]
+[ext_resource type="Script" uid="uid://drl7ywtxslsbm" path="res://scripts/ui/card/shovel_in_ui.gd" id="12_piv46"]
+[ext_resource type="Texture2D" uid="uid://dh1c6v7dpaxmd" path="res://assets/image/ui/ui_card/Shovel.png" id="13_ychx5"]
+[ext_resource type="Texture2D" uid="uid://bgy071auro307" path="res://assets/image/ui/ui_card/all_card/SeedChooser_Background.png" id="14_rdutc"]
+[ext_resource type="Texture2D" uid="uid://b1fuu1s6nfxnq" path="res://assets/image/ui/ui_card/all_card/SeedChooser_Button_Glow.png" id="15_rcyd1"]
+[ext_resource type="Texture2D" uid="uid://gy84wwo8bimw" path="res://assets/image/ui/ui_card/all_card/SeedChooser_Button_Glow2.png" id="16_p3cky"]
+[ext_resource type="Script" uid="uid://parybxg7tb1k" path="res://scripts/ui/PVZ_button_base.gd" id="17_sivhd"]
+[ext_resource type="Script" uid="uid://b2rst408m72au" path="res://scripts/manager/hand_manager.gd" id="18_llb6i"]
+[ext_resource type="Script" uid="uid://cdcjkojcv1r2v" path="res://scripts/manager/zombie_manager.gd" id="19_ys217"]
+[ext_resource type="PackedScene" uid="uid://brbdbxg2tocla" path="res://scenes/ui/flag_progress_bar.tscn" id="20_efwyo"]
+[ext_resource type="Texture2D" uid="uid://uh50cdkqdl67" path="res://assets/image/background/background1.jpg" id="21_f1xqs"]
+[ext_resource type="Script" uid="uid://c8vlhy0axw8nc" path="res://scripts/ui/main_game_ui/area_2d_home.gd" id="22_pagcj"]
+[ext_resource type="Theme" uid="uid://em12la0rqibq" path="res://PVZ_theme.tres" id="23_us3ob"]
+[ext_resource type="PackedScene" uid="uid://dajgv0lrme2e5" path="res://scenes/character/zombie/001_zombie_norm.tscn" id="24_cryo8"]
+[ext_resource type="PackedScene" uid="uid://du2e1o3whmhu" path="res://scenes/character/plant/009_puff_shroom.tscn" id="25_i7su1"]
+[ext_resource type="PackedScene" uid="uid://c8bd2m73sdwhf" path="res://scenes/item/game_scenes_item/day_suns.tscn" id="25_n0u02"]
+[ext_resource type="PackedScene" uid="uid://cc7p37ej38620" path="res://scenes/character/zombie/002_zombie_flag.tscn" id="26_2r650"]
+[ext_resource type="Script" uid="uid://cyutow4qwsjq5" path="res://scripts/ui/main_game_ui/ui_remind_word.gd" id="26_76kpm"]
+[ext_resource type="PackedScene" uid="uid://dt1jogtl3siy" path="res://scenes/character/zombie/003_zombie_cone.tscn" id="27_i7su1"]
+[ext_resource type="Texture2D" uid="uid://bll1o67ycmid6" path="res://assets/image/ui/ui_remind_word/StartReady.png" id="27_tp7js"]
+[ext_resource type="PackedScene" uid="uid://clo5u4nptdu6d" path="res://scenes/character/zombie/004_zombie_pole_vaulter.tscn" id="28_twlh0"]
+[ext_resource type="Texture2D" uid="uid://daqyr7g1dgckt" path="res://assets/image/ui/ui_remind_word/StartSet.png" id="28_wswlt"]
+[ext_resource type="Texture2D" uid="uid://bcv81qevn5hpt" path="res://assets/image/ui/ui_remind_word/StartPlant.png" id="29_ky37a"]
+[ext_resource type="PackedScene" uid="uid://jt53svi027mm" path="res://scenes/character/zombie/005_zombie_bucket.tscn" id="29_oe5t3"]
+[ext_resource type="Texture2D" uid="uid://c4jwi8yjt7hmd" path="res://assets/image/ui/ui_remind_word/Approaching.png" id="30_01qis"]
+[ext_resource type="Texture2D" uid="uid://bp2ironyexkgp" path="res://assets/image/ui/ui_remind_word/FinalWave.png" id="31_q6cph"]
+[ext_resource type="Texture2D" uid="uid://vcaw16pvdqga" path="res://assets/image/ui/ui_remind_word/ZombiesWon.png" id="32_ta2kk"]
+[ext_resource type="Script" uid="uid://3j46ottso760" path="res://scripts/ui/main_game_ui/main_game_menu_button.gd" id="33_egxjl"]
+[ext_resource type="Texture2D" uid="uid://toxyk2jadqam" path="res://assets/image/ui/ui_main_game_menu/option_dialog.png" id="34_xmtg1"]
+[ext_resource type="Script" uid="uid://djkmy1xylm8hs" path="res://scripts/ui/ui_main_game_menu/main_game_menu_option_dialog.gd" id="35_735rm"]
+[ext_resource type="PackedScene" uid="uid://5v0fdtao52jl" path="res://scenes/main/control_canvas_layer.tscn" id="36_yvidt"]
+[ext_resource type="Texture2D" uid="uid://blge6mwmus5fv" path="res://assets/image/ui/ui_main_game_menu/btn_dialog_back_2.png" id="37_tqiwl"]
+[ext_resource type="BitMap" uid="uid://bhg7gejfpw036" path="res://assets/image/ui/ui_main_game_menu/btn_dialog_back_2_mask.png" id="38_hx5k4"]
+[ext_resource type="PackedScene" uid="uid://cp0kgnsx20pyh" path="res://scenes/ui/dialog.tscn" id="39_ydb0n"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x628s"]
-texture = ExtResource("7_jqayl")
+texture = ExtResource("8_g1dp7")
 texture_margin_left = 80.0
 texture_margin_top = 10.0
 texture_margin_right = 10.0
@@ -53,9 +59,9 @@ texture_margin_bottom = 10.0
 size = Vector2(141, 602)
 
 [node name="MainGame" type="Node2D"]
-script = ExtResource("1_ohie6")
-bgm_choose_card = ExtResource("2_v56hd")
-bgm_main_game = ExtResource("3_iq302")
+script = ExtResource("1_2hh43")
+bgm_choose_card = ExtResource("2_11mrt")
+bgm_main_game = ExtResource("3_rhi2v")
 mode_column = false
 is_test = true
 
@@ -70,47 +76,47 @@ offset_right = -45.0
 offset_bottom = 178.0
 mouse_filter = 2
 
-[node name="PlantCell" parent="PlantCells/HBoxContainer" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell" parent="PlantCells/HBoxContainer" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell2" parent="PlantCells/HBoxContainer" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell2" parent="PlantCells/HBoxContainer" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell3" parent="PlantCells/HBoxContainer" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell3" parent="PlantCells/HBoxContainer" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell4" parent="PlantCells/HBoxContainer" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell4" parent="PlantCells/HBoxContainer" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell5" parent="PlantCells/HBoxContainer" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell5" parent="PlantCells/HBoxContainer" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell6" parent="PlantCells/HBoxContainer" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell6" parent="PlantCells/HBoxContainer" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell7" parent="PlantCells/HBoxContainer" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell7" parent="PlantCells/HBoxContainer" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell8" parent="PlantCells/HBoxContainer" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell8" parent="PlantCells/HBoxContainer" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell9" parent="PlantCells/HBoxContainer" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell9" parent="PlantCells/HBoxContainer" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -122,47 +128,47 @@ offset_top = 181.0
 offset_right = -45.0
 offset_bottom = 277.0
 
-[node name="PlantCell" parent="PlantCells/HBoxContainer2" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell" parent="PlantCells/HBoxContainer2" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell2" parent="PlantCells/HBoxContainer2" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell2" parent="PlantCells/HBoxContainer2" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell3" parent="PlantCells/HBoxContainer2" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell3" parent="PlantCells/HBoxContainer2" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell4" parent="PlantCells/HBoxContainer2" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell4" parent="PlantCells/HBoxContainer2" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell5" parent="PlantCells/HBoxContainer2" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell5" parent="PlantCells/HBoxContainer2" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell6" parent="PlantCells/HBoxContainer2" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell6" parent="PlantCells/HBoxContainer2" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell7" parent="PlantCells/HBoxContainer2" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell7" parent="PlantCells/HBoxContainer2" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell8" parent="PlantCells/HBoxContainer2" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell8" parent="PlantCells/HBoxContainer2" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell9" parent="PlantCells/HBoxContainer2" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell9" parent="PlantCells/HBoxContainer2" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -174,47 +180,47 @@ offset_top = 281.0
 offset_right = -45.0
 offset_bottom = 377.0
 
-[node name="PlantCell" parent="PlantCells/HBoxContainer3" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell" parent="PlantCells/HBoxContainer3" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell2" parent="PlantCells/HBoxContainer3" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell2" parent="PlantCells/HBoxContainer3" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell3" parent="PlantCells/HBoxContainer3" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell3" parent="PlantCells/HBoxContainer3" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell4" parent="PlantCells/HBoxContainer3" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell4" parent="PlantCells/HBoxContainer3" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell5" parent="PlantCells/HBoxContainer3" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell5" parent="PlantCells/HBoxContainer3" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell6" parent="PlantCells/HBoxContainer3" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell6" parent="PlantCells/HBoxContainer3" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell7" parent="PlantCells/HBoxContainer3" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell7" parent="PlantCells/HBoxContainer3" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell8" parent="PlantCells/HBoxContainer3" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell8" parent="PlantCells/HBoxContainer3" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell9" parent="PlantCells/HBoxContainer3" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell9" parent="PlantCells/HBoxContainer3" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -226,47 +232,47 @@ offset_top = 380.0
 offset_right = -45.0
 offset_bottom = 476.0
 
-[node name="PlantCell" parent="PlantCells/HBoxContainer4" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell" parent="PlantCells/HBoxContainer4" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell2" parent="PlantCells/HBoxContainer4" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell2" parent="PlantCells/HBoxContainer4" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell3" parent="PlantCells/HBoxContainer4" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell3" parent="PlantCells/HBoxContainer4" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell4" parent="PlantCells/HBoxContainer4" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell4" parent="PlantCells/HBoxContainer4" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell5" parent="PlantCells/HBoxContainer4" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell5" parent="PlantCells/HBoxContainer4" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell6" parent="PlantCells/HBoxContainer4" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell6" parent="PlantCells/HBoxContainer4" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell7" parent="PlantCells/HBoxContainer4" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell7" parent="PlantCells/HBoxContainer4" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell8" parent="PlantCells/HBoxContainer4" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell8" parent="PlantCells/HBoxContainer4" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell9" parent="PlantCells/HBoxContainer4" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell9" parent="PlantCells/HBoxContainer4" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -279,54 +285,72 @@ offset_right = -45.0
 offset_bottom = 574.0
 mouse_filter = 2
 
-[node name="PlantCell" parent="PlantCells/HBoxContainer5" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell" parent="PlantCells/HBoxContainer5" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell2" parent="PlantCells/HBoxContainer5" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell2" parent="PlantCells/HBoxContainer5" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell3" parent="PlantCells/HBoxContainer5" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell3" parent="PlantCells/HBoxContainer5" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell4" parent="PlantCells/HBoxContainer5" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell4" parent="PlantCells/HBoxContainer5" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell5" parent="PlantCells/HBoxContainer5" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell5" parent="PlantCells/HBoxContainer5" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell6" parent="PlantCells/HBoxContainer5" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell6" parent="PlantCells/HBoxContainer5" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell7" parent="PlantCells/HBoxContainer5" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell7" parent="PlantCells/HBoxContainer5" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell8" parent="PlantCells/HBoxContainer5" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell8" parent="PlantCells/HBoxContainer5" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlantCell9" parent="PlantCells/HBoxContainer5" instance=ExtResource("4_6mjp7")]
+[node name="PlantCell9" parent="PlantCells/HBoxContainer5" instance=ExtResource("4_k85g3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="LawnMovers" type="Node2D" parent="."]
+z_index = 450
+
+[node name="LawnMover" parent="LawnMovers" instance=ExtResource("5_j6qim")]
+position = Vector2(25, 151)
+
+[node name="LawnMover2" parent="LawnMovers" instance=ExtResource("5_j6qim")]
+position = Vector2(25, 243)
+
+[node name="LawnMover3" parent="LawnMovers" instance=ExtResource("5_j6qim")]
+position = Vector2(25, 341)
+
+[node name="LawnMover4" parent="LawnMovers" instance=ExtResource("5_j6qim")]
+position = Vector2(25, 439)
+
+[node name="LawnMover5" parent="LawnMovers" instance=ExtResource("5_j6qim")]
+position = Vector2(25, 542)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
-script = ExtResource("5_8ink4")
+script = ExtResource("6_pbnrj")
 
 [node name="CardManager" type="Control" parent="Camera2D"]
 layout_mode = 3
@@ -334,21 +358,21 @@ anchors_preset = 0
 offset_right = 676.0
 offset_bottom = 600.0
 mouse_filter = 2
-script = ExtResource("6_pbsx2")
+script = ExtResource("7_cimig")
 start_sun = 10000
 
 [node name="CardBarAndShovel" type="HBoxContainer" parent="Camera2D/CardManager"]
-z_index = 900
+z_index = 100
 layout_mode = 0
-offset_left = 13.0
-offset_right = 573.0
+offset_left = 93.0
+offset_right = 307.0
 offset_bottom = 90.0
 theme_override_constants/separation = 0
 
 [node name="CardBarBg" type="PanelContainer" parent="Camera2D/CardManager/CardBarAndShovel"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_x628s")
-script = ExtResource("8_r6cme")
+script = ExtResource("9_awk1m")
 
 [node name="SunLabelControl" type="Control" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg"]
 layout_mode = 2
@@ -373,58 +397,10 @@ theme_override_constants/separation = 0
 
 [node name="CardPlaceholder_ori" type="TextureRect" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
-[node name="Card" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList/CardPlaceholder_ori" instance=ExtResource("10_j1fnf")]
-
-[node name="CardPlaceholder_ori2" type="TextureRect" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList"]
-layout_mode = 2
-texture = ExtResource("9_mg1sn")
-
-[node name="Card" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList/CardPlaceholder_ori2" instance=ExtResource("10_j1fnf")]
-card_type = 1
-
-[node name="CardPlaceholder_ori3" type="TextureRect" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList"]
-layout_mode = 2
-texture = ExtResource("9_mg1sn")
-
-[node name="Card" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList/CardPlaceholder_ori3" instance=ExtResource("10_j1fnf")]
-card_type = 2
-
-[node name="CardPlaceholder_ori4" type="TextureRect" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList"]
-layout_mode = 2
-texture = ExtResource("9_mg1sn")
-
-[node name="Card" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList/CardPlaceholder_ori4" instance=ExtResource("10_j1fnf")]
-card_type = 3
-
-[node name="CardPlaceholder_ori5" type="TextureRect" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList"]
-layout_mode = 2
-texture = ExtResource("9_mg1sn")
-
-[node name="Card" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList/CardPlaceholder_ori5" instance=ExtResource("10_j1fnf")]
-card_type = 4
-
-[node name="CardPlaceholder_ori6" type="TextureRect" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList"]
-layout_mode = 2
-texture = ExtResource("9_mg1sn")
-
-[node name="Card" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList/CardPlaceholder_ori6" instance=ExtResource("10_j1fnf")]
-card_type = 5
-
-[node name="CardPlaceholder_ori7" type="TextureRect" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList"]
-layout_mode = 2
-texture = ExtResource("9_mg1sn")
-
-[node name="Card" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList/CardPlaceholder_ori7" instance=ExtResource("10_j1fnf")]
-card_type = 6
-
-[node name="CardPlaceholder_ori8" type="TextureRect" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList"]
-layout_mode = 2
-texture = ExtResource("9_mg1sn")
-
-[node name="Card" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList/CardPlaceholder_ori8" instance=ExtResource("10_j1fnf")]
-card_type = 7
+[node name="Card" parent="Camera2D/CardManager/CardBarAndShovel/CardBarBg/CardUiList/CardPlaceholder_ori" instance=ExtResource("11_sus73")]
+card_type = 8
 
 [node name="MarginContainer" type="MarginContainer" parent="Camera2D/CardManager/CardBarAndShovel"]
 layout_mode = 2
@@ -432,8 +408,8 @@ theme_override_constants/margin_bottom = 18
 
 [node name="ShovelBg" type="TextureRect" parent="Camera2D/CardManager/CardBarAndShovel/MarginContainer"]
 layout_mode = 2
-texture = ExtResource("10_oafhf")
-script = ExtResource("11_e6ewp")
+texture = ExtResource("11_dfggp")
+script = ExtResource("12_piv46")
 
 [node name="Shovel" type="TextureRect" parent="Camera2D/CardManager/CardBarAndShovel/MarginContainer/ShovelBg"]
 layout_mode = 1
@@ -446,7 +422,7 @@ offset_right = 5.0
 offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("12_l5djx")
+texture = ExtResource("13_ychx5")
 
 [node name="Button" type="Button" parent="Camera2D/CardManager/CardBarAndShovel/MarginContainer/ShovelBg"]
 layout_mode = 1
@@ -487,7 +463,7 @@ offset_top = -513.0
 offset_right = 232.5
 grow_horizontal = 2
 grow_vertical = 0
-texture = ExtResource("13_7mdi3")
+texture = ExtResource("14_rdutc")
 
 [node name="GridContainer" type="GridContainer" parent="Camera2D/CardManager/CardChooser/TextureRect"]
 layout_mode = 0
@@ -502,195 +478,195 @@ columns = 8
 [node name="CardPlaceholder" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 custom_minimum_size = Vector2(50, 70)
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder2" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder3" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder4" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder5" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder6" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder7" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder8" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder9" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder10" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder11" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder12" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder13" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder14" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder15" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder16" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder17" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder18" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder19" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder20" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder21" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder22" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder23" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder24" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder25" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder26" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder27" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder28" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder29" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder30" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder31" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder32" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder33" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder34" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder35" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder36" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder37" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder38" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder39" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder40" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder41" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder42" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder43" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder44" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder45" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder46" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder47" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="CardPlaceholder48" type="TextureRect" parent="Camera2D/CardManager/CardChooser/TextureRect/GridContainer"]
 layout_mode = 2
-texture = ExtResource("9_mg1sn")
+texture = ExtResource("10_800aw")
 
 [node name="TextureButton" type="TextureButton" parent="Camera2D/CardManager/CardChooser/TextureRect"]
 layout_mode = 1
@@ -706,10 +682,10 @@ offset_bottom = 244.5
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-texture_normal = ExtResource("14_ovtx8")
-texture_pressed = ExtResource("15_hn2o2")
-texture_hover = ExtResource("15_hn2o2")
-script = ExtResource("16_e60wv")
+texture_normal = ExtResource("15_rcyd1")
+texture_pressed = ExtResource("16_p3cky")
+texture_hover = ExtResource("16_p3cky")
+script = ExtResource("17_sivhd")
 
 [node name="TemporaryCard" type="Control" parent="Camera2D/CardManager"]
 z_index = 1150
@@ -719,20 +695,21 @@ offset_bottom = 40.0
 
 [node name="Manager" type="Node2D" parent="."]
 
-[node name="HamdManager" type="Node2D" parent="Manager"]
-script = ExtResource("17_nl67b")
+[node name="HandManager" type="Node2D" parent="Manager"]
+script = ExtResource("18_llb6i")
+is_shovel = null
 
-[node name="Shovel" type="Sprite2D" parent="Manager/HamdManager"]
+[node name="Shovel" type="Sprite2D" parent="Manager/HandManager"]
 visible = false
 z_index = 950
 z_as_relative = false
 position = Vector2(687, 67)
-texture = ExtResource("12_l5djx")
+texture = ExtResource("13_ychx5")
 centered = false
 offset = Vector2(-14, -70)
 
 [node name="ZombieManager" type="Node2D" parent="Manager"]
-script = ExtResource("18_i1nka")
+script = ExtResource("19_ys217")
 
 [node name="WaveTimer" type="Timer" parent="Manager/ZombieManager"]
 one_shot = true
@@ -750,16 +727,24 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 21
 text = "当前僵尸数量：0"
 
+[node name="FlagProgressBar" parent="Manager/ZombieManager" instance=ExtResource("20_efwyo")]
+visible = false
+z_index = 1000
+offset_left = 614.0
+offset_top = 575.0
+offset_right = 614.0
+offset_bottom = 575.0
+
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(493, 0)
-texture = ExtResource("19_j14ba")
+texture = ExtResource("21_f1xqs")
 offset = Vector2(0, 300)
 
 [node name="Area2DHome" type="Area2D" parent="Background"]
 process_mode = 3
 position = Vector2(-624, 8)
 collision_mask = 20
-script = ExtResource("20_l1gsm")
+script = ExtResource("22_pagcj")
 
 [node name="Dialog" type="Control" parent="Background/Area2DHome"]
 visible = false
@@ -771,7 +756,7 @@ offset_left = 335.0
 offset_top = 153.0
 offset_right = 335.0
 offset_bottom = 153.0
-theme = ExtResource("21_wsn6s")
+theme = ExtResource("23_us3ob")
 
 [node name="Panel" type="Panel" parent="Background/Area2DHome/Dialog"]
 layout_mode = 0
@@ -850,7 +835,7 @@ button_group = null
 shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
-script = ExtResource("16_e60wv")
+script = ExtResource("17_sivhd")
 metadata/_custom_type_script = "uid://parybxg7tb1k"
 
 [node name="Panel" type="Panel" parent="Background/Area2DHome/Dialog/PVZButton"]
@@ -889,14 +874,15 @@ shape = SubResource("RectangleShape2D_yy6tc")
 [node name="TemporaryPlants" type="Node2D" parent="."]
 z_index = 900
 
+[node name="PuffShroom" parent="TemporaryPlants" instance=ExtResource("25_i7su1")]
+position = Vector2(250, 233)
+
 [node name="Zombies" type="Node2D" parent="."]
 z_index = 400
 
 [node name="Zombies_row1" type="Node2D" parent="Zombies"]
 z_index = 1
 position = Vector2(850, 125)
-
-[node name="ZombieNorm" parent="Zombies/Zombies_row1" instance=ExtResource("23_m74em")]
 
 [node name="Zombies_row2" type="Node2D" parent="Zombies"]
 z_index = 2
@@ -917,6 +903,21 @@ position = Vector2(850, 525)
 [node name="TemporaryZombies" type="Node2D" parent="."]
 z_index = 400
 
+[node name="ZombieNorm" parent="TemporaryZombies" instance=ExtResource("24_cryo8")]
+position = Vector2(511, 229)
+
+[node name="ZombieFlag" parent="TemporaryZombies" instance=ExtResource("26_2r650")]
+position = Vector2(348, 114)
+
+[node name="ZombieCone" parent="TemporaryZombies" instance=ExtResource("27_i7su1")]
+position = Vector2(516, 121)
+
+[node name="ZombiePoleVaulter" parent="TemporaryZombies" instance=ExtResource("28_twlh0")]
+position = Vector2(637, 121)
+
+[node name="ZombieBucket" parent="TemporaryZombies" instance=ExtResource("29_oe5t3")]
+position = Vector2(449, 115)
+
 [node name="ShowZombie" type="Node2D" parent="."]
 z_index = 400
 y_sort_enabled = true
@@ -928,16 +929,8 @@ z_index = 600
 [node name="Bombs" type="Node2D" parent="."]
 z_index = 650
 
-[node name="DaySuns" parent="." instance=ExtResource("22_hd6sf")]
+[node name="DaySuns" parent="." instance=ExtResource("25_n0u02")]
 z_index = 800
-
-[node name="FlagProgressBar" parent="." instance=ExtResource("23_dnvqr")]
-visible = false
-z_index = 1000
-offset_left = 614.0
-offset_top = 575.0
-offset_right = 614.0
-offset_bottom = 575.0
 
 [node name="UIRemindWord" type="Control" parent="."]
 visible = false
@@ -949,7 +942,7 @@ offset_bottom = 600.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-script = ExtResource("24_ct03v")
+script = ExtResource("26_76kpm")
 
 [node name="Ready" type="TextureRect" parent="UIRemindWord"]
 visible = false
@@ -965,7 +958,7 @@ offset_right = 150.0
 offset_bottom = 66.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("25_fl42k")
+texture = ExtResource("27_tp7js")
 
 [node name="Set" type="TextureRect" parent="UIRemindWord"]
 visible = false
@@ -981,7 +974,7 @@ offset_right = 150.0
 offset_bottom = 66.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("26_1m2bq")
+texture = ExtResource("28_wswlt")
 
 [node name="Plant" type="TextureRect" parent="UIRemindWord"]
 visible = false
@@ -997,7 +990,7 @@ offset_right = 150.0
 offset_bottom = 66.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("27_w83rw")
+texture = ExtResource("29_ky37a")
 
 [node name="Approaching" type="TextureRect" parent="UIRemindWord"]
 visible = false
@@ -1013,7 +1006,7 @@ offset_right = 246.0
 offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("28_wh8vx")
+texture = ExtResource("30_01qis")
 
 [node name="FinalWave" type="TextureRect" parent="UIRemindWord"]
 visible = false
@@ -1029,7 +1022,7 @@ offset_right = 170.5
 offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("29_siqmm")
+texture = ExtResource("31_q6cph")
 
 [node name="ZombiesWon" type="TextureRect" parent="UIRemindWord"]
 visible = false
@@ -1045,7 +1038,7 @@ offset_right = 282.0
 offset_bottom = 234.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("30_s0ea2")
+texture = ExtResource("32_ta2kk")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -1058,7 +1051,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme = ExtResource("21_wsn6s")
+theme = ExtResource("23_us3ob")
 metadata/_edit_use_anchors_ = true
 
 [node name="MainGameMenuButton" type="BaseButton" parent="CanvasLayer/All_UI"]
@@ -1132,7 +1125,7 @@ button_group = null
 shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
-script = ExtResource("31_at8lp")
+script = ExtResource("33_egxjl")
 metadata/_custom_type_script = "uid://parybxg7tb1k"
 
 [node name="Panel" type="Panel" parent="CanvasLayer/All_UI/MainGameMenuButton"]
@@ -1170,8 +1163,8 @@ offset_right = 206.0
 offset_bottom = 241.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("32_y7v2f")
-script = ExtResource("33_8lx13")
+texture = ExtResource("34_xmtg1")
+script = ExtResource("35_735rm")
 
 [node name="Option" type="Control" parent="CanvasLayer/All_UI/MainGameMenuOptionDialog"]
 anchors_preset = 0
@@ -1321,7 +1314,7 @@ button_group = null
 shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
-script = ExtResource("16_e60wv")
+script = ExtResource("17_sivhd")
 metadata/_custom_type_script = "uid://parybxg7tb1k"
 
 [node name="Panel" type="Panel" parent="CanvasLayer/All_UI/MainGameMenuOptionDialog/Option/Button1"]
@@ -1416,7 +1409,7 @@ button_group = null
 shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
-script = ExtResource("16_e60wv")
+script = ExtResource("17_sivhd")
 metadata/_custom_type_script = "uid://parybxg7tb1k"
 
 [node name="Panel" type="Panel" parent="CanvasLayer/All_UI/MainGameMenuOptionDialog/Option/Button4"]
@@ -1440,7 +1433,7 @@ text = "选项设置"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CanvasLayer" parent="CanvasLayer/All_UI/MainGameMenuOptionDialog/Option/Button4" instance=ExtResource("34_kb45x")]
+[node name="CanvasLayer" parent="CanvasLayer/All_UI/MainGameMenuOptionDialog/Option/Button4" instance=ExtResource("36_yvidt")]
 visible = false
 
 [node name="Button2" type="BaseButton" parent="CanvasLayer/All_UI/MainGameMenuOptionDialog/Option"]
@@ -1514,7 +1507,7 @@ button_group = null
 shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
-script = ExtResource("16_e60wv")
+script = ExtResource("17_sivhd")
 metadata/_custom_type_script = "uid://parybxg7tb1k"
 
 [node name="Panel" type="Panel" parent="CanvasLayer/All_UI/MainGameMenuOptionDialog/Option/Button2"]
@@ -1609,7 +1602,7 @@ button_group = null
 shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
-script = ExtResource("16_e60wv")
+script = ExtResource("17_sivhd")
 metadata/_custom_type_script = "uid://parybxg7tb1k"
 
 [node name="Panel" type="Panel" parent="CanvasLayer/All_UI/MainGameMenuOptionDialog/Option/Button3"]
@@ -1646,10 +1639,10 @@ offset_right = 181.0
 offset_bottom = -2.5
 grow_horizontal = 2
 grow_vertical = 0
-texture_normal = ExtResource("35_dr4hc")
-texture_pressed = ExtResource("35_dr4hc")
-texture_click_mask = ExtResource("36_8kjc2")
-script = ExtResource("16_e60wv")
+texture_normal = ExtResource("37_tqiwl")
+texture_pressed = ExtResource("37_tqiwl")
+texture_click_mask = ExtResource("38_hx5k4")
+script = ExtResource("17_sivhd")
 
 [node name="Label" type="Label" parent="CanvasLayer/All_UI/MainGameMenuOptionDialog/Return"]
 layout_mode = 0
@@ -1660,7 +1653,7 @@ offset_bottom = 82.0
 theme_override_font_sizes/font_size = 50
 text = "返回游戏"
 
-[node name="Dialog" parent="CanvasLayer/All_UI" instance=ExtResource("37_l00cp")]
+[node name="Dialog" parent="CanvasLayer/All_UI" instance=ExtResource("39_ydb0n")]
 visible = false
 layout_mode = 1
 offset_left = 242.0

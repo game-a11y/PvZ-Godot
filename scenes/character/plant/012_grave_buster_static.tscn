@@ -1,0 +1,103 @@
+[gd_scene load_steps=12 format=3 uid="uid://cwwbhd87ascmn"]
+
+[ext_resource type="Texture2D" uid="uid://bseho2qheiaf8" path="res://assets/reanim/Gravebuster_tooth1.png" id="1_c1prp"]
+[ext_resource type="Texture2D" uid="uid://byhmiftp3dmop" path="res://assets/reanim/Gravebuster_tooth2.png" id="2_g2wy7"]
+[ext_resource type="Texture2D" uid="uid://qinarboxtts" path="res://assets/reanim/Gravebuster_tooth3.png" id="3_o4fgi"]
+[ext_resource type="Texture2D" uid="uid://7dkpxwhmucee" path="res://assets/reanim/Gravebuster_tooth6.png" id="4_4o3mt"]
+[ext_resource type="Texture2D" uid="uid://d8b3mlmo8v7r" path="res://assets/reanim/Gravebuster_tooth5.png" id="5_b7onp"]
+[ext_resource type="Texture2D" uid="uid://bhdioqe5grdh" path="res://assets/reanim/Gravebuster_tooth4.png" id="6_3myip"]
+[ext_resource type="Texture2D" uid="uid://bfawqvsa26402" path="res://assets/reanim/Gravebuster_vines.png" id="7_1jb7g"]
+[ext_resource type="Texture2D" uid="uid://bh1qwq2plfdko" path="res://assets/reanim/Gravebuster_head.png" id="8_pv65c"]
+[ext_resource type="Texture2D" uid="uid://g5tu8r7nm4vb" path="res://assets/reanim/Gravebuster_eyebrows.png" id="9_et1ua"]
+[ext_resource type="Texture2D" uid="uid://b57mg4i7plnyl" path="res://assets/reanim/Gravebuster_leaf1.png" id="10_8dokj"]
+[ext_resource type="Texture2D" uid="uid://hq6ny8dbufej" path="res://assets/reanim/Gravebuster_leaf2.png" id="11_yqq0q"]
+
+[node name="GraveBuster" type="Node2D"]
+scale = Vector2(0.45, 0.45)
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-38, -43)
+
+[node name="Gravebuster_tooth1" type="Sprite2D" parent="Body"]
+position = Vector2(7.3, 49)
+texture = ExtResource("1_c1prp")
+centered = false
+
+[node name="Gravebuster_tooth2" type="Sprite2D" parent="Body"]
+position = Vector2(12, 45)
+texture = ExtResource("2_g2wy7")
+centered = false
+
+[node name="Gravebuster_tooth3" type="Sprite2D" parent="Body"]
+position = Vector2(26.6, 45.6)
+texture = ExtResource("3_o4fgi")
+centered = false
+
+[node name="Gravebuster_tooth6" type="Sprite2D" parent="Body"]
+position = Vector2(59, 48.3)
+texture = ExtResource("4_4o3mt")
+centered = false
+
+[node name="Gravebuster_tooth5" type="Sprite2D" parent="Body"]
+position = Vector2(49, 44.2)
+texture = ExtResource("5_b7onp")
+centered = false
+
+[node name="Gravebuster_tooth4" type="Sprite2D" parent="Body"]
+position = Vector2(37.9, 44.5)
+texture = ExtResource("6_3myip")
+centered = false
+
+[node name="Gravebuster_vines" type="Sprite2D" parent="Body"]
+position = Vector2(-1.8, 5.5)
+texture = ExtResource("7_1jb7g")
+centered = false
+
+[node name="Gravebuster_head" type="Sprite2D" parent="Body"]
+position = Vector2(3, 13.5)
+texture = ExtResource("8_pv65c")
+centered = false
+
+[node name="Gravebuster_eyebrows" type="Sprite2D" parent="Body"]
+position = Vector2(12.1, 16.2)
+scale = Vector2(1, 0.844)
+texture = ExtResource("9_et1ua")
+centered = false
+
+[node name="Gravebuster_leaf1" type="Sprite2D" parent="Body"]
+position = Vector2(-9.1, 12.7)
+rotation = 0.153589
+scale = Vector2(0.999, 0.999)
+texture = ExtResource("10_8dokj")
+centered = false
+
+[node name="Gravebuster_leaf2" type="Sprite2D" parent="Body"]
+position = Vector2(84.4, 18.1)
+rotation = 1.09607
+scale = Vector2(0.945, 1.028)
+skew = 0.048869
+texture = ExtResource("11_yqq0q")
+centered = false
+
+[node name="Gravebuster_leaf3" type="Sprite2D" parent="Body"]
+position = Vector2(62.8, 4)
+rotation = 0.164061
+scale = Vector2(1.019, 0.951)
+skew = 0.0680678
+texture = ExtResource("11_yqq0q")
+centered = false
+
+[node name="Gravebuster_leaf4" type="Sprite2D" parent="Body"]
+position = Vector2(29.6, 0.3)
+rotation = 6.05629
+scale = Vector2(0.995, 0.912)
+skew = -0.153589
+texture = ExtResource("11_yqq0q")
+centered = false
+
+[node name="Gravebuster_leaf5" type="Sprite2D" parent="Body"]
+position = Vector2(6.8, 13.3)
+rotation = 4.7089
+scale = Vector2(0.938, 1.034)
+texture = ExtResource("11_yqq0q")
+centered = false

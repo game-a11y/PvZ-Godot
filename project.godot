@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="GodotPVZ-Dream_me"
+config/name="GodotPVZ-Dream"
 run/main_scene="uid://dc1xvxus2co66"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
@@ -46,6 +46,7 @@ Zombie=""
 2d_physics/layer_3="Zombie"
 2d_physics/layer_4="Bullet"
 2d_physics/layer_5="ZombieInJump"
+2d_physics/layer_6="ZombieBeHypnotized"
 
 [rendering]
 

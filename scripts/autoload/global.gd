@@ -8,8 +8,10 @@ extends Node
 # 图层顺序：
 #世界背景： 0
 #Ui1: 100	鼠标未移入UI时，在最下面
+#墓碑: 150
 #植物： 200
 #僵尸： 400
+#小推车： 450
 #子弹： 600
 #爆炸： 650
 #阳光： 800
@@ -20,6 +22,9 @@ extends Node
 #UI4： 1100 所有备选植物卡槽
 #UI5:  1150 卡片选择移动时临时位置
 #奖杯： 2000
+
+
+
 #region 角色
 # 定义枚举
 enum CharacterType {Plant, Zombie}
@@ -63,7 +68,41 @@ var CardInfo = {
 		CardInfoAttribute.CoolTime: 2.0,
 		CardInfoAttribute.SunCost: 200
 		},
+	PlantType.PuffShroom: {
+		CardInfoAttribute.CoolTime: 2.0,
+		CardInfoAttribute.SunCost: 0
+		},
+	PlantType.SunShroom: {
+		CardInfoAttribute.CoolTime: 2.0,
+		CardInfoAttribute.SunCost: 25
+		},
+	PlantType.FumeShroom: {
+		CardInfoAttribute.CoolTime: 0.0,
+		CardInfoAttribute.SunCost: 75
+		},
+	PlantType.GraveBuster: {
+		CardInfoAttribute.CoolTime: 2.0,
+		CardInfoAttribute.SunCost: 75
+		},
+	PlantType.HypnoShroom: {
+		CardInfoAttribute.CoolTime: 2.0,
+		CardInfoAttribute.SunCost: 75
+		},
+	PlantType.ScaredyShroom: {
+		CardInfoAttribute.CoolTime: 2.0,
+		CardInfoAttribute.SunCost: 25
+		},
+	PlantType.IceShroom: {
+		CardInfoAttribute.CoolTime: 2.0,
+		CardInfoAttribute.SunCost: 75
+		},
+	PlantType.DoomShroom: {
+		CardInfoAttribute.CoolTime: 2.0,
+		CardInfoAttribute.SunCost: 125
+		},
 }
+
+
 #endregion
 
 #region 植物
@@ -76,6 +115,14 @@ enum PlantType {
 	SnowPea,
 	Chomper,
 	PeaShooterDouble,
+	PuffShroom,
+	SunShroom,
+	FumeShroom,
+	GraveBuster,
+	HypnoShroom,
+	ScaredyShroom,
+	IceShroom,
+	DoomShroom,
 	}
 
 var PlantTypeSceneMap = {
@@ -87,6 +134,14 @@ var PlantTypeSceneMap = {
 	PlantType.SnowPea: preload("res://scenes/character/plant/006_snow_pea.tscn"),
 	PlantType.Chomper: preload("res://scenes/character/plant/007_chomper.tscn"),
 	PlantType.PeaShooterDouble: preload("res://scenes/character/plant/008_pea_shooter_double.tscn"),
+	PlantType.PuffShroom: preload("res://scenes/character/plant/009_puff_shroom.tscn"),
+	PlantType.SunShroom: preload("res://scenes/character/plant/010_sun_shroom.tscn"),
+	PlantType.FumeShroom: preload("res://scenes/character/plant/011_fume_shroom.tscn"),
+	PlantType.GraveBuster: preload("res://scenes/character/plant/012_grave_buster.tscn"),
+	PlantType.HypnoShroom: preload("res://scenes/character/plant/013_hypno_shroom.tscn"),
+	PlantType.ScaredyShroom: preload("res://scenes/character/plant/014_scaredy_shroom.tscn"),
+	PlantType.IceShroom: preload("res://scenes/character/plant/015_ice_shroom.tscn"),
+	PlantType.DoomShroom: preload("res://scenes/character/plant/016_doom_shroom.tscn"),
 }
 
 var StaticPlantTypeSceneMap = {
@@ -98,6 +153,14 @@ var StaticPlantTypeSceneMap = {
 	PlantType.SnowPea: preload("res://scenes/character/plant/006_snow_pea_static.tscn"),
 	PlantType.Chomper: preload("res://scenes/character/plant/007_chomper_static.tscn"),
 	PlantType.PeaShooterDouble: preload("res://scenes/character/plant/008_pea_shooter_double_static.tscn"),
+	PlantType.PuffShroom: preload("res://scenes/character/plant/009_puff_shroom_static.tscn"),
+	PlantType.SunShroom: preload("res://scenes/character/plant/010_sun_shroom_static.tscn"),
+	PlantType.FumeShroom: preload("res://scenes/character/plant/011_fume_shroom_static.tscn"),
+	PlantType.GraveBuster: preload("res://scenes/character/plant/012_grave_buster_static.tscn"),
+	PlantType.HypnoShroom: preload("res://scenes/character/plant/013_hypno_shroom_static.tscn"),
+	PlantType.ScaredyShroom: preload("res://scenes/character/plant/014_scaredy_shroom_static.tscn"),
+	PlantType.IceShroom: preload("res://scenes/character/plant/015_ice_shroom_static.tscn"),
+	PlantType.DoomShroom: preload("res://scenes/character/plant/016_doom_shroom_static.tscn"),
 }
 
 #endregion
@@ -148,8 +211,10 @@ var GameBgTextureMap = {
 
 #endregion
 
+#endregion
 
 #region 用户相关
+
 
 #region 用户配置相关
 const CONGIF_PATH := "user://config.ini"
@@ -159,6 +224,7 @@ var auto_collect_sun := false
 var auto_collect_coin := false
 var disappear_spare_card_Placeholder := false
 var display_plant_HP_label := false
+var display_zombie_HP_label := false
 
 var time_scale := 1.0
 
@@ -173,6 +239,7 @@ func save_config():
 	config.set_value("user_control", "auto_collect_coin", auto_collect_coin) 
 	config.set_value("user_control", "disappear_spare_card_Placeholder", disappear_spare_card_Placeholder) 
 	config.set_value("user_control", "display_plant_HP_label", display_plant_HP_label) 
+	config.set_value("user_control", "display_zombie_HP_label", display_zombie_HP_label) 
 
 	config.save(CONGIF_PATH)
 	
@@ -199,6 +266,7 @@ func load_config():
 	auto_collect_coin = config.get_value("user_control", "auto_collect_coin", false) 
 	disappear_spare_card_Placeholder = config.get_value("user_control", "disappear_spare_card_Placeholder", false) 
 	display_plant_HP_label = config.get_value("user_control", "display_plant_HP_label", false) 
+	display_zombie_HP_label = config.get_value("user_control", "display_zombie_HP_label", false) 
 	
 	
 	
@@ -215,8 +283,18 @@ var curr_plant = [
 	PlantType.PotatoMine,
 	PlantType.SnowPea,
 	PlantType.Chomper,
-	PlantType.PeaShooterDouble,	
+	PlantType.PeaShooterDouble,
+	PlantType.PuffShroom,
+	PlantType.SunShroom,
+	PlantType.FumeShroom,
+	PlantType.GraveBuster,
+	PlantType.HypnoShroom,
+	PlantType.ScaredyShroom,
+	PlantType.IceShroom,
+	PlantType.DoomShroom,
 ]
+
+
 
 var card_in_seed_chooser = preload("res://scenes/ui/card_in_seed_chooser.tscn")
 
@@ -246,6 +324,36 @@ func load_game():
 	return
 	
 #endregion
+
+
+#endregion
+
+#region 关卡相关
+enum MainGameLevel{
+	FrontDay,
+	FrontNight
+}
+
+var  MainGameLevelBgmMap = {
+	MainGameLevel.FrontDay: "res://assets/audio/BGM/front_day.mp3",
+	MainGameLevel.FrontNight: "res://assets/audio/BGM/front_night.mp3"
+}
+
+var main_game_level :MainGameLevel = MainGameLevel.FrontNight
+
+
+## 预加载关卡
+enum MainScenes{
+	StartMenu,
+	ChooseLevel,
+	MainGame
+}
+
+var MainScenesMap = {
+	MainScenes.StartMenu: "res://scenes/main/01StartMenu.tscn",
+	MainScenes.ChooseLevel: "res://scenes/main/02ChooesLevel.tscn",
+	MainScenes.MainGame: "res://scenes/main/MainGame.tscn",
+}
 
 
 #endregion

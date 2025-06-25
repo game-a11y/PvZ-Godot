@@ -10,14 +10,37 @@ class_name BulletPea
 
 @export var bullet_mode : Global.BulletMode
 
-@onready var bullet_effect: BulletEffect = $BulletEffect
+@export var bullet_effect: BulletEffect
 
+## 子弹移动离出生点最大距离
+@export var max_distance := 2000.0
+## 子弹初始位置
+var start_pos: Vector2
+
+## 超出屏幕500像素删除
+var screen_rect: Rect2 
+
+func _ready() -> void:
+	# 必须在 ready 后才能安全获取视口尺寸
+	screen_rect = get_viewport_rect().grow(500)
+	# 安全获取BulletEffect节点并验证类型
+	if has_node("BulletEffect"):
+		var effect_node = $BulletEffect
+		bullet_effect = effect_node
+
+	else:
+		# 可以选择禁用子弹效果或使用默认值
+		bullet_effect = null
+	
 func _process(delta: float) -> void:
 	# 每帧移动子弹
 	position += direction * speed * delta
 	
-	## 子弹超出屏幕500像素删除
-	var screen_rect = get_viewport_rect().grow(500)
+		# 新增：移动超过250像素后销毁
+	if global_position.distance_to(start_pos) > max_distance:
+		queue_free()
+
+	
 	if not screen_rect.has_point(global_position):
 		queue_free()
 		
@@ -27,8 +50,9 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		is_attack = true
 		var zombie :ZombieBase = area.get_parent()
 		_attack_zombie(zombie)
-		bullet_effect_change_parent(bullet_effect)
-		bullet_effect.activate_bullet_effect()
+		if bullet_effect:
+			bullet_effect_change_parent(bullet_effect)
+			bullet_effect.activate_bullet_effect()
 		queue_free()
 
 

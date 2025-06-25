@@ -44,6 +44,10 @@ func _on_select_anim_folder():
 	var dialog = FileDialog.new()
 	dialog.access = FileDialog.ACCESS_RESOURCES  
 	dialog.file_mode = FileDialog.FILE_MODE_OPEN_DIR
+	
+	var full_path = anim_path_option.text
+	dialog.current_dir = full_path
+	
 	dialog.dir_selected.connect(func(path):
 		var fixed_path = path
 		if not fixed_path.ends_with("/"):

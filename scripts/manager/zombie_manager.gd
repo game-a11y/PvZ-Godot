@@ -15,8 +15,11 @@ var curr_flag := -1
 var flag_front_wave := false	#是否为旗前波
 @export var curr_zombie_num:int = 0
 
-## 所有僵尸行
-@export var zombies_row:Array
+## 所有僵尸行的节点
+@export var zombies_row_node:Array[Node]
+## 按行保存僵尸，用于保存僵尸列表的列表
+@export var zombies_all_list:Array 
+
 @onready var flag_progress_bar: FlagProgressBar = $FlagProgressBar
 
 ## 自然刷新计时器
@@ -33,6 +36,12 @@ var flag_front_wave := false	#是否为旗前波
 
 ## 每段根据当前波次时间，每秒多长
 @export var progress_bar_segment_mini_every_sec:float
+
+## 冰冻特效场景
+const IceEffectScenes:PackedScene =  preload("res://scenes/fx/ice_effect.tscn")
+## 刷新僵尸时怪叫
+@export var groan_SFX : Array[AudioStreamPlayer]
+
 
 #region 僵尸出怪列表相关参数
 # 创建出怪列表
@@ -83,11 +92,27 @@ func _ready():
 
 ## 初始僵尸管理器
 func init_zombie_manager(zombies:Node2D, max_wave:int):
-	zombies_row = zombies.get_children()
+	zombies_row_node = zombies.get_children()
+	for i in range(len(zombies_row_node)):
+		zombies_all_list.append([])  # 每次添加一个新的空列表
+		
 	self.max_wave = max_wave
 	flag_progress_bar.init_flag_from_wave(max_wave)
 
 	progress_bar_segment_every_wave = 100.0 / (max_wave - 1)
+
+
+## 显示僵尸血量
+func display_zombie_HP_label():
+	if Global.display_zombie_HP_label:
+		for zombies_row_list in zombies_all_list:
+			for zombie:ZombieBase in zombies_row_list:
+				zombie.label_hp.visible = true
+	else:
+		for zombies_row_list in zombies_all_list:
+			for zombie:ZombieBase in zombies_row_list:
+				zombie.label_hp.visible = false
+
 	
 #region 生成僵尸列表
 # 生成100波出怪列表，每波最多50只僵尸
@@ -225,6 +250,7 @@ func start_first_wave():
 
 ## 开始刷新下一波
 func start_next_wave() -> void:
+	
 	print("-----------------------------------")
 	if current_wave >= max_wave:
 		print("🎉 结束(该语句应该不出现逻辑才对)")
@@ -255,27 +281,32 @@ func spawn_wave_zombies(zombie_data: Array) -> void:
 	wave_current_health = 0
 	
 	for z in zombie_data:
-		var lane : int = randi() % len(zombies_row)
-		var zombie:ZombieBase = spawn_zombie(z, lane)
-		zombie.lane = lane
-		zombie.zombie_damaged.connect(_on_zombie_damaged)
-		zombie.zombie_dead.connect(_on_zombie_dead)
-		zombie.curr_wave = current_wave
-		zombie.is_idle = false
-		if zombie.zombie_type == Global.ZombieType.ZombieFlag:
-			print("旗帜僵尸")
-			zombie.position.x = -20
-		else:
-			zombie.position.x = randf_range(0, 20)
+		var lane : int = randi() % len(zombies_row_node)
+		spawn_zombie(z, lane)
 		
-		wave_total_health += zombie.get_zombie_all_hp()
 	wave_current_health = wave_total_health
 	label_zombie_sum.text = "当前僵尸数量：" + str(curr_zombie_num)
 	
 ## 生成一个僵尸
 func spawn_zombie(zombie_type: Global.ZombieType, lane: int) -> Node:
+	
 	var z:ZombieBase = Global.ZombieTypeSceneMap[zombie_type].instantiate()
-	zombies_row[lane].add_child(z)
+	zombies_row_node[lane].add_child(z)
+
+	z.lane = lane
+	z.zombie_damaged.connect(_on_zombie_damaged)
+	z.zombie_dead.connect(_on_zombie_dead)
+	z.curr_wave = current_wave
+	z.is_idle = false
+	if z.zombie_type == Global.ZombieType.ZombieFlag:
+		print("旗帜僵尸")
+		z.position.x = -20
+	else:
+		z.position.x = randf_range(0, 20)
+		
+		wave_total_health += z.get_zombie_all_hp()
+	
+	zombies_all_list[lane].append(z)
 	curr_zombie_num += 1
 	
 	return z
@@ -290,10 +321,12 @@ func _on_zombie_damaged(damage: int, wave:int) -> void:
 		check_refresh_condition()
 
 ## 僵尸发射死亡信号后调用函数
-func _on_zombie_dead(zombie_global_position: Vector2) -> void:
+func _on_zombie_dead(zombie: ZombieBase) -> void:
 	# 不额外减血；死亡前已由 take_damage 扣减
 	curr_zombie_num -= 1
 	label_zombie_sum.text = "当前僵尸数量：" + str(curr_zombie_num)
+	
+	zombies_all_list[zombie.lane].erase(zombie)
 	
 	## 当前是旗前波并僵尸全部死亡
 	if flag_front_wave and curr_zombie_num == 0:
@@ -305,7 +338,7 @@ func _on_zombie_dead(zombie_global_position: Vector2) -> void:
 		print("=======================游戏结束，您获胜了=======================")
 		var trophy = trophy_scenes.instantiate()
 		get_tree().current_scene.add_child(trophy)
-		trophy.global_position = zombie_global_position
+		trophy.global_position = zombie.global_position
 		if trophy.global_position.x >= 750:
 			var x_diff = trophy.global_position.x - 750
 			throw_to(trophy, trophy.position - Vector2(x_diff + randf_range(0,50), 0))
@@ -339,8 +372,8 @@ func check_refresh_condition() -> void:
 ## 残半刷新判断
 func refresh_health_half():
 	if refresh_triggered:
-	
 		return
+	
 	print("⚡ 激活刷新达成（当前血量:,",wave_current_health,"刷新血量", refresh_health)
 	refresh_triggered = true
 	if wave_timer.is_stopped() == false:
@@ -367,6 +400,9 @@ func refresh_flag_wave():
 	
 	await main_game.ui_remind_word.zombie_approach(current_wave == max_wave-1)
 	await get_tree().create_timer(2.0).timeout
+	
+	## 汽笛音效
+	SoundManager.play_sfx("Progress/Siren")
 	
 	var end_time = Time.get_ticks_msec()
 	var elapsed = (end_time - start_time) / 1000.0  # 转换为秒
@@ -435,7 +471,7 @@ func show_zombie_create():
 		for i in range(randi_range(1, 4)):
 
 			var z:ZombieBase = Global.ZombieTypeSceneMap[zombie_type].instantiate()
-
+			
 			z.is_idle = true
 
 			# 避免僵尸移动
@@ -446,13 +482,32 @@ func show_zombie_create():
 			)
 			show_zombie.add_child(z)
 			
+			z.label_hp.visible = false
 			
 			show_zombie_array.append(z)
-		
+			
+			
 func show_zombie_delete():
 	for z in show_zombie_array:
 		z.queue_free()  # 标记节点待释放
 
 	show_zombie_array.clear()  # 最后清空数组
+
+#endregion
+
+
+#region 植物调用相关，冰冻所有僵尸
+func ice_all_zombie(time_ice:float, time_decelerate: float):
+	for zombie_row:Array in zombies_all_list:
+		if zombie_row.is_empty():
+			continue
+		for zombie:ZombieBase in zombie_row:
+			zombie.be_ice(time_ice, time_decelerate)
+			## 冰冻效果
+			var ice_effect = IceEffectScenes.instantiate()
+			zombie.add_child(ice_effect)
+			ice_effect.init_ice_effect(time_ice)
+			
+
 
 #endregion

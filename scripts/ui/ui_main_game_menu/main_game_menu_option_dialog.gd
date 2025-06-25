@@ -2,7 +2,6 @@ extends TextureRect
 class_name MainGameMenuOptionDialog
 
 @onready var dialog: Dialog = $"../Dialog"
-var start_menu_scene = preload("res://scenes/main/01StartMenu.tscn")
 
 @onready var music_h_slider: HSlider = $Option/VBoxContainer/Music/HSlider
 @onready var sound_h_slider: HSlider = $Option/VBoxContainer/SoundEffect/HSlider
@@ -71,11 +70,7 @@ func resume_game():
 ## 返回主菜单
 func return_main_menu():
 	get_tree().paused = false
-	get_tree().change_scene_to_packed(start_menu_scene)
-	
-	Global.time_scale = 1.0
-	Engine.time_scale = Global.time_scale
-
+	get_tree().change_scene_to_file(Global.MainScenesMap[Global.MainScenes.StartMenu])
 
 ## 功能未实现
 func _unrealized():

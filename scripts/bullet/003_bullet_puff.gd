@@ -1,0 +1,2 @@
+extends BulletPea
+class_name BulletPuff

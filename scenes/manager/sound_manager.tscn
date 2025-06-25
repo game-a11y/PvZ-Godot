@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://batejflfm7jxj"]
+[gd_scene load_steps=23 format=3 uid="uid://batejflfm7jxj"]
 
 [ext_resource type="Script" uid="uid://b2p2bkr2jdfep" path="res://scripts/autoload/sound_manager.gd" id="1_yi7ou"]
 [ext_resource type="AudioStream" uid="uid://u8bbkihmmkhm" path="res://assets/audio/SFX/button/gravebutton.ogg" id="2_fii6r"]
@@ -20,6 +20,8 @@
 [ext_resource type="AudioStream" uid="uid://bimtniv8kkaga" path="res://assets/audio/SFX/progress/hugewave.ogg" id="18_nbotw"]
 [ext_resource type="AudioStream" uid="uid://bs7vp71yx6lgi" path="res://assets/audio/SFX/progress/readysetplant.ogg" id="19_72jt4"]
 [ext_resource type="AudioStream" uid="uid://cvpcoiaeca4ag" path="res://assets/audio/SFX/progress/scream.ogg" id="20_sptjd"]
+[ext_resource type="AudioStream" uid="uid://xfoepecq7wmy" path="res://assets/audio/SFX/progress/siren.ogg" id="21_4g5ki"]
+[ext_resource type="AudioStream" uid="uid://4imjcgbcxrij" path="res://assets/audio/SFX/zombie/gravestone_rumble.ogg" id="22_nbotw"]
 
 [node name="SoundManager" type="Node"]
 process_mode = 1
@@ -114,3 +116,10 @@ stream = ExtResource("19_72jt4")
 
 [node name="Scream" type="AudioStreamPlayer" parent="SFX/Progress"]
 stream = ExtResource("20_sptjd")
+
+[node name="Siren" type="AudioStreamPlayer" parent="SFX/Progress"]
+stream = ExtResource("21_4g5ki")
+
+[node name="GravestoneRumble" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("22_nbotw")
+bus = &"SFX"

@@ -19,7 +19,7 @@ particles_anim_loop = false
 _data = [Vector2(0, 0.52809), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_hpcex"]
+[sub_resource type="CurveTexture" id="CurveTexture_jsxne"]
 curve = SubResource("Curve_q3utr")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sjk4b"]
@@ -32,7 +32,7 @@ spread = 20.0
 gravity = Vector3(0, 0, 0)
 scale_min = 0.0
 scale_max = 0.5
-scale_curve = SubResource("CurveTexture_hpcex")
+scale_curve = SubResource("CurveTexture_jsxne")
 anim_offset_max = 1.0
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_j7vtg"]
@@ -116,9 +116,10 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_xw0nn")
 
-[node name="BulletEffect" type="Node2D" parent="."]
+[node name="BulletEffect" type="Node2D" parent="." node_paths=PackedStringArray("splats")]
 visible = false
 script = ExtResource("4_5e53v")
+splats = NodePath("Splats")
 
 [node name="Splats" type="Sprite2D" parent="BulletEffect"]
 texture = ExtResource("5_drsiy")

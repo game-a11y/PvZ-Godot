@@ -6,9 +6,6 @@ class_name Trophy
 @onready var all_rays: Node2D = $AllRays
 @onready var glow: Node2D = $Glow
 
-var start_menu_scene = preload("res://scenes/main/01StartMenu.tscn")
-
-
 func _ready():
 	var tween = create_tween()
 	tween.tween_property(pick_up_glow, "scale", Vector2(1.5, 1.5), 1.0) \
@@ -41,4 +38,4 @@ func _on_trophy_button_pressed() -> void:
 	tween_glow.tween_property(glow, "modulate:a", 1, 5.0)
 	
 	await get_tree().create_timer(5.0).timeout
-	get_tree().change_scene_to_packed(start_menu_scene)
+	get_tree().change_scene_to_file(Global.MainScenesMap[Global.MainScenes.StartMenu])

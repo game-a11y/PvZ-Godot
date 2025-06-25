@@ -9,7 +9,7 @@ class_name ZombieBase
 var frame_counter := 0
 @export var damage_per_second := 100
 var _curr_damage_per_second : int
-var _curr_plant :PlantBase
+var _curr_character :CharacterBase
 
 ## 僵尸所在行
 @export var lane : int
@@ -90,26 +90,61 @@ enum  WalkingStatus {start, walking, end}
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
 
 #region 被爆炸炸死相关
-@onready var body: Node2D = $Body
+#@onready var body: Node2D = $Body
 @onready var zombie_charred: Node2D = $ZombieCharred
 @onready var anim_lib: AnimationPlayer = $ZombieCharred/AnimLib
 #endregion
 
 ## 僵尸被攻击信号，传递给ZombieManager
-signal zombie_damaged(damage: int, wave: int)
+signal zombie_damaged
 ## 僵尸被击杀信号，传递给ZombieManager
 signal zombie_dead
 
 
+#region 被魅惑相关
+@export_group("被魅惑相关")
+@export var is_hypnotized: bool = false
+## 被魅惑颜色
+var be_hypnotized_color := Color(1, 1, 1)
+var be_hypnotized_color_res := Color(1, 0.5, 1)
+
+#endregion
+
 
 func _ready() -> void:
 	super._ready()
+	
 	_previous_ground_global_x = _ground.position.x
 	
 	armor_first_curr_hp = armor_first_max_hp
 	armor_second_curr_hp = armor_second_max_hp
 	
 	_curr_damage_per_second = damage_per_second
+	
+	# 设置检测射线的碰撞层
+	ray_cast_2d.collision_mask = 0
+	# 添加第2层和第6层（注意层索引从0开始）
+	ray_cast_2d.collision_mask |= 1 << 1  # 第2层 植物层
+	ray_cast_2d.collision_mask |= 1 << 5  # 第6层 被魅惑僵尸
+	
+	# 设置碰撞器所在层数
+	area2d.collision_layer = 4	# 第3层
+	
+	updata_hp_label()
+	
+func updata_hp_label():
+	label_hp.text = str(curr_Hp)
+	if armor_first_curr_hp > 0:
+		label_hp.text = label_hp.text + "+" + str(armor_first_curr_hp)
+	if armor_second_curr_hp > 0:
+		label_hp.text = label_hp.text + "+" + str(armor_second_curr_hp)
+	
+	if Global.display_zombie_HP_label:
+		label_hp.visible = true
+	else:
+		label_hp.visible = false
+
+
 
 func _process(delta):
 	# 每帧检查射线是否碰到植物
@@ -117,9 +152,9 @@ func _process(delta):
 		if not is_attack:
 			
 			var collider = ray_cast_2d.get_collider()
-			if collider is Area2D:
+
 			# 获取Area2D的父节点
-				_curr_plant = collider.get_parent()
+			_curr_character = collider.get_parent()
 				
 			is_walk = false
 			walking_status = WalkingStatus.end
@@ -128,9 +163,9 @@ func _process(delta):
 		
 	else:
 		if is_attack:
-			_curr_plant = null
-			
+			_curr_character = null
 			is_attack = false
+			
 			is_walk = true
 			walking_status = WalkingStatus.start
 	
@@ -146,18 +181,19 @@ func _physics_process(delta: float) -> void:
 			_walk()
 	
 	## 如果正在攻击
-	if _curr_plant and is_attack:
+	if _curr_character and is_attack:
 		## 每4帧扣血一次
 		frame_counter += 1
 		
-		# 每三帧植物掉血一次，被减速每6帧植物掉血一次 
-		if is_decelerated:
-			if frame_counter % 6 == 0:
-				_curr_plant.be_attacked(_curr_damage_per_second * delta * 3)
-			
-		else:
-			if frame_counter % 3 == 0:
-				_curr_plant.be_attacked(_curr_damage_per_second * delta * 3)
+		if not is_iced:
+			# 每三帧植物掉血一次，被减速每6帧植物掉血一次 
+			if is_decelerated:
+				if frame_counter % 6 == 0:
+					_curr_character.be_eated(_curr_damage_per_second * delta * 3, self)
+				
+			else:
+				if frame_counter % 3 == 0:
+					_curr_character.be_eated(_curr_damage_per_second * delta * 3, self)
 			
 		# 防止过大，每 10000 帧归零（大概每 167 秒）
 		if frame_counter >= 10000:
@@ -189,16 +225,17 @@ func _walk():
 #endregion
 
 #region 僵尸被攻击
-## 被子弹攻击
+## 被子弹攻击，重写父类方法
 func be_attacked_bullet(attack_value:int, bullet_mode : Global.BulletMode):
 	# SFX 根据防具是否有铁器进行判断，防具掉落时修改bool值
 	if be_bullet_SFX_is_shield_first or be_bullet_SFX_is_shield_second: 
 		get_node("SFX/Bullet/Shieldhit" + str(randi_range(1,2))).play()
 	else:
 		get_node("SFX/Bullet/Splat" + str(randi_range(1,3))).play()
+		
+	## 掉血，发光,直接调用父类方法
+	super.be_attacked_bullet(attack_value, bullet_mode)
 	
-	Hp_loss(attack_value, bullet_mode)
-	body_light()
 	zombie_damaged.emit(attack_value, curr_wave)
 
 #region 僵尸血量防具改变
@@ -277,7 +314,7 @@ func arm1_drop():
 
 #region 僵尸血量改变
 # 僵尸被攻击时掉血（包括防具变化）
-func Hp_loss(attack_value:int, bullet_mode : Global.BulletMode):
+func Hp_loss(attack_value:int, bullet_mode : Global.BulletMode = Global.BulletMode.Norm):
 	match bullet_mode:
 		## 普通子弹
 		Global.BulletMode.Norm:
@@ -324,7 +361,9 @@ func Hp_loss(attack_value:int, bullet_mode : Global.BulletMode):
 			if curr_Hp > 0 and attack_value > 0:
 				curr_Hp -= attack_value
 				judge_status()
-			
+	
+	updata_hp_label()
+	
 ## 血量状态判断
 func judge_status():
 	if curr_Hp <= max_hp/3 and curr_hp_status < 3:
@@ -370,13 +409,61 @@ func _head_fade():
 
 ## 僵尸啃咬一次，动画中调用,攻击音效
 func _attack_once():
-	get_node("SFX/Chomp").play()
-	_curr_plant.be_attacked_body_light()
+	if not is_death:
+		get_node("SFX/Chomp").play()
+	if _curr_character:
+		_curr_character.be_eated_once(self)
+
+#region 僵尸特殊状态:魅惑
+#僵尸被魅惑
+func be_hypnotized():
+	# 重置碰撞器所在层数
+	area2d.collision_layer = 32		#第6层
+	
+	# 重置检测射线的碰撞层
+	ray_cast_2d.collision_mask = 0
+	# 添加第4层和第5层（注意层索引从0开始，所以第3层是索引2，第5层是索引4）
+	ray_cast_2d.collision_mask |= 1 << 2  # 第3层 僵尸层
+	ray_cast_2d.collision_mask |= 1 << 4  # 第5层 撑杆跳跳跃层
+	
+	flip_zombie()
+	
+	# 更新僵尸颜色
+	be_hypnotized_color = be_hypnotized_color_res
+	_update_modulate()
+	
+	## 发送僵尸被攻击和死亡信号
+	var zombie_all_hp = get_zombie_all_hp()
+	zombie_damaged.emit(zombie_all_hp, curr_wave)
+	zombie_dead.emit(self)
+	
+	
+# 重写父类颜色变化
+func _update_modulate():
+	var final_color = base_color * _hit_color * debuff_color * be_hypnotized_color
+	body.modulate = final_color
+
+	
+# 直接设置scale
+func flip_zombie():
+	# 进行水平翻转
+	scale = scale * Vector2(-1, 1)
+
+
+#endregion
+
 
 #region 僵尸死亡相关
 # 删除僵尸
 func delete_zombie():
 	self.queue_free()
+
+
+## 被小推车碾压
+func be_mowered_run():
+	# 减速当前所有血量
+	Hp_loss(get_zombie_all_hp())
+	zombie_damaged.emit(curr_Hp, curr_wave)
 
 
 ## 僵尸删除area,即僵尸死亡
@@ -388,7 +475,7 @@ func _delete_area2d():
 		var zombie_all_hp = get_zombie_all_hp()
 		zombie_damaged.emit(zombie_all_hp, curr_wave)
 		
-		zombie_dead.emit(global_position)
+		zombie_dead.emit(self)
 		area2d.queue_free()
 	
 	
@@ -403,9 +490,8 @@ func be_bomb_death():
 	await anim_lib.animation_finished
 	delete_zombie()
 
-
-## 僵尸被大嘴花吃掉
-func be_chomper_death():
+## 僵尸直接死亡	
+func disappear_death():
 	_delete_area2d()	# 删除碰撞器
 	delete_zombie()
 

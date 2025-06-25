@@ -19,8 +19,12 @@ func play_bgm(stream: AudioStream):
 
 func play_sfx(name:String):
 	var player := sfx.get_node(name) as AudioStreamPlayer
-	
+
 	if not player:
+		return
+		
+	# 如果音效正在播放，则跳过
+	if player.playing:
 		return
 		
 	player.play()

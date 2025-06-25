@@ -1,11 +1,12 @@
-[gd_scene load_steps=41 format=3 uid="uid://b2soejmoqi7wd"]
+[gd_scene load_steps=50 format=3 uid="uid://b2soejmoqi7wd"]
 
 [ext_resource type="Script" uid="uid://c7dr2016dfdoo" path="res://scripts/manager/main_game_manager.gd" id="1_7dde3"]
 [ext_resource type="AudioStream" uid="uid://duvijencyf7mi" path="res://assets/audio/BGM/choose_card.mp3" id="2_8fvtd"]
 [ext_resource type="Script" uid="uid://b2rst408m72au" path="res://scripts/manager/hand_manager.gd" id="3_acpf0"]
-[ext_resource type="AudioStream" uid="uid://cypqibotos5mp" path="res://assets/audio/BGM/first.mp3" id="3_tjo6j"]
 [ext_resource type="Texture2D" uid="uid://dh1c6v7dpaxmd" path="res://assets/image/ui/ui_card/Shovel.png" id="4_w5iw5"]
+[ext_resource type="PackedScene" uid="uid://cflpyoqris51r" path="res://scenes/fx/doom_shroom_crater.tscn" id="5_3tcal"]
 [ext_resource type="Script" uid="uid://cdcjkojcv1r2v" path="res://scripts/manager/zombie_manager.gd" id="5_j3aa3"]
+[ext_resource type="PackedScene" uid="uid://dv5fiu4pkryba" path="res://scenes/item/game_scenes_item/lawn_mower.tscn" id="5_w0404"]
 [ext_resource type="Script" uid="uid://c5llwle352r6f" path="res://scripts/manager/card_manager.gd" id="5_yy6tc"]
 [ext_resource type="Script" uid="uid://bd3w3y5b02dut" path="res://scripts/ui/main_game_ui/card_bar.gd" id="8_ifnc6"]
 [ext_resource type="Texture2D" uid="uid://hvvk2fdgo3pw" path="res://assets/image/ui/ui_card/SeedBank.png" id="8_xvvqk"]
@@ -23,18 +24,25 @@
 [ext_resource type="Texture2D" uid="uid://daqyr7g1dgckt" path="res://assets/image/ui/ui_remind_word/StartSet.png" id="19_3tcal"]
 [ext_resource type="Script" uid="uid://c8vlhy0axw8nc" path="res://scripts/ui/main_game_ui/area_2d_home.gd" id="19_tjo6j"]
 [ext_resource type="Texture2D" uid="uid://bcv81qevn5hpt" path="res://assets/image/ui/ui_remind_word/StartPlant.png" id="20_2b7lk"]
-[ext_resource type="Texture2D" uid="uid://b3550p4p5rm2f" path="res://assets/image/background/background2.jpg" id="20_ifnc6"]
+[ext_resource type="Texture2D" uid="uid://uh50cdkqdl67" path="res://assets/image/background/background1.jpg" id="20_ifnc6"]
 [ext_resource type="Texture2D" uid="uid://c4jwi8yjt7hmd" path="res://assets/image/ui/ui_remind_word/Approaching.png" id="21_48j6u"]
 [ext_resource type="Texture2D" uid="uid://bp2ironyexkgp" path="res://assets/image/ui/ui_remind_word/FinalWave.png" id="22_httmh"]
+[ext_resource type="AudioStream" uid="uid://b0a14btnqbv0l" path="res://assets/audio/SFX/zombie/groan/groan2.ogg" id="22_vyo3a"]
+[ext_resource type="AudioStream" uid="uid://c1v38q1krjff6" path="res://assets/audio/SFX/zombie/groan/groan3.ogg" id="23_b4qea"]
 [ext_resource type="Texture2D" uid="uid://vcaw16pvdqga" path="res://assets/image/ui/ui_remind_word/ZombiesWon.png" id="23_vyo3a"]
 [ext_resource type="Script" uid="uid://dhkfw0onmxcyf" path="res://scripts/camera/main_game_camera.gd" id="24_b4qea"]
+[ext_resource type="AudioStream" uid="uid://ds0xvjrngfga7" path="res://assets/audio/SFX/zombie/groan/groan4.ogg" id="24_xaurn"]
 [ext_resource type="Theme" uid="uid://em12la0rqibq" path="res://PVZ_theme.tres" id="25_aop5g"]
+[ext_resource type="AudioStream" uid="uid://defpxdm4tuwyl" path="res://assets/audio/SFX/zombie/groan/groan5.ogg" id="25_v6enx"]
 [ext_resource type="Script" uid="uid://3j46ottso760" path="res://scripts/ui/main_game_ui/main_game_menu_button.gd" id="26_84h1o"]
+[ext_resource type="AudioStream" uid="uid://b74lc0i183mdq" path="res://assets/audio/SFX/zombie/groan/groan6.ogg" id="26_q0roe"]
+[ext_resource type="AudioStream" uid="uid://dwnat3mgf3tqo" path="res://assets/audio/SFX/zombie/groan/groan.ogg" id="27_2tf6e"]
 [ext_resource type="Texture2D" uid="uid://toxyk2jadqam" path="res://assets/image/ui/ui_main_game_menu/option_dialog.png" id="27_w5iw5"]
 [ext_resource type="Script" uid="uid://djkmy1xylm8hs" path="res://scripts/ui/ui_main_game_menu/main_game_menu_option_dialog.gd" id="28_mddbc"]
 [ext_resource type="Script" uid="uid://parybxg7tb1k" path="res://scripts/ui/PVZ_button_base.gd" id="29_8fvtd"]
 [ext_resource type="BitMap" uid="uid://bhg7gejfpw036" path="res://assets/image/ui/ui_main_game_menu/btn_dialog_back_2_mask.png" id="30_xvvqk"]
 [ext_resource type="Texture2D" uid="uid://blge6mwmus5fv" path="res://assets/image/ui/ui_main_game_menu/btn_dialog_back_2.png" id="33_w0404"]
+[ext_resource type="Script" uid="uid://bwp666ia1e8t7" path="res://scripts/fx/panel_color.gd" id="33_ybhi1"]
 [ext_resource type="PackedScene" uid="uid://cp0kgnsx20pyh" path="res://scenes/ui/dialog.tscn" id="34_8fvtd"]
 [ext_resource type="PackedScene" uid="uid://5v0fdtao52jl" path="res://scenes/main/control_canvas_layer.tscn" id="34_ifnc6"]
 
@@ -50,10 +58,11 @@ texture_margin_bottom = 10.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yy6tc"]
 size = Vector2(141, 602)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ybhi1"]
+
 [node name="MainGame" type="Node2D"]
 script = ExtResource("1_7dde3")
 bgm_choose_card = ExtResource("2_8fvtd")
-bgm_main_game = ExtResource("3_tjo6j")
 mode_column = false
 game_bg = 1
 
@@ -72,6 +81,8 @@ mouse_filter = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Crater" parent="PlantCells/HBoxContainer/PlantCell" instance=ExtResource("5_3tcal")]
 
 [node name="PlantCell2" parent="PlantCells/HBoxContainer" instance=ExtResource("14_ifnc6")]
 layout_mode = 2
@@ -321,6 +332,24 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="LawnMovers" type="Node2D" parent="."]
+z_index = 450
+
+[node name="LawnMover" parent="LawnMovers" instance=ExtResource("5_w0404")]
+position = Vector2(25, 151)
+
+[node name="LawnMover2" parent="LawnMovers" instance=ExtResource("5_w0404")]
+position = Vector2(25, 243)
+
+[node name="LawnMover3" parent="LawnMovers" instance=ExtResource("5_w0404")]
+position = Vector2(25, 341)
+
+[node name="LawnMover4" parent="LawnMovers" instance=ExtResource("5_w0404")]
+position = Vector2(25, 439)
+
+[node name="LawnMover5" parent="LawnMovers" instance=ExtResource("5_w0404")]
+position = Vector2(25, 542)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -669,7 +698,6 @@ offset_bottom = 40.0
 
 [node name="HandManager" type="Node2D" parent="Manager"]
 script = ExtResource("3_acpf0")
-is_shovel = null
 
 [node name="Shovel" type="Sprite2D" parent="Manager/HandManager"]
 visible = false
@@ -706,6 +734,36 @@ offset_left = 614.0
 offset_top = 575.0
 offset_right = 614.0
 offset_bottom = 575.0
+
+[node name="SFX" type="Control" parent="Manager/ZombieManager"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Groan2" type="AudioStreamPlayer" parent="Manager/ZombieManager/SFX"]
+stream = ExtResource("22_vyo3a")
+bus = &"SFX"
+
+[node name="Groan3" type="AudioStreamPlayer" parent="Manager/ZombieManager/SFX"]
+stream = ExtResource("23_b4qea")
+bus = &"SFX"
+
+[node name="Groan4" type="AudioStreamPlayer" parent="Manager/ZombieManager/SFX"]
+stream = ExtResource("24_xaurn")
+bus = &"SFX"
+
+[node name="Groan5" type="AudioStreamPlayer" parent="Manager/ZombieManager/SFX"]
+stream = ExtResource("25_v6enx")
+bus = &"SFX"
+
+[node name="Groan6" type="AudioStreamPlayer" parent="Manager/ZombieManager/SFX"]
+stream = ExtResource("26_q0roe")
+bus = &"SFX"
+
+[node name="Groan" type="AudioStreamPlayer" parent="Manager/ZombieManager/SFX"]
+stream = ExtResource("27_2tf6e")
+bus = &"SFX"
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(493, 0)
@@ -993,6 +1051,30 @@ offset_bottom = 234.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("23_vyo3a")
+
+[node name="CanvasLayer_FX" type="CanvasLayer" parent="."]
+
+[node name="Panel_Ice" type="Panel" parent="CanvasLayer_FX"]
+modulate = Color(0, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ybhi1")
+script = ExtResource("33_ybhi1")
+
+[node name="Panel_Doom" type="Panel" parent="CanvasLayer_FX"]
+modulate = Color(0.619608, 0, 0.623529, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ybhi1")
+script = ExtResource("33_ybhi1")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

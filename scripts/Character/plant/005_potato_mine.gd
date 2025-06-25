@@ -16,8 +16,8 @@ func _ready() -> void:
 	super._ready()
 	
 	_start_rise_timer()
-	
 	## 继承樱桃炸弹，已经设置不眨眼
+
 
 func _start_rise_timer() -> void:
 	await get_tree().create_timer(bury_time).timeout
@@ -41,4 +41,11 @@ func _process(delta):
 			is_bomb = true
 			await get_tree().physics_frame    # 等待碰撞层更新生效
 			_bomb_all_area_zombie()
-			
+
+
+func _bomb_all_area_zombie():
+	var areas = area_2d_2.get_overlapping_areas()
+	for area in areas:
+		area.get_parent().disappear_death()
+	
+	_bomb_particle()

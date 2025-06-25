@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://bla4mtorhe64j"]
+
+[ext_resource type="Texture2D" uid="uid://c213mmlt125el" path="res://assets/reanim/IceShroom_base.png" id="5_c0rtn"]
+[ext_resource type="Texture2D" uid="uid://dhb33lor5gb5w" path="res://assets/reanim/IceShroom_blink1.png" id="7_0ew61"]
+[ext_resource type="Texture2D" uid="uid://cco82p2wd1ql4" path="res://assets/reanim/IceShroom_head.png" id="8_37res"]
+[ext_resource type="Texture2D" uid="uid://3a0yexorxcsk" path="res://assets/reanim/IceShroom_body.png" id="9_flkgs"]
+
+[node name="IceShroom" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-39, -40)
+
+[node name="Anim_face" type="Sprite2D" parent="Body"]
+position = Vector2(13.7, 38.1)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("9_flkgs")
+centered = false
+
+[node name="IceShroom_base" type="Sprite2D" parent="Body"]
+position = Vector2(8.5, 60.1)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("5_c0rtn")
+centered = false
+
+[node name="Anim_sleep1" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Anim_blink" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(27.3, 38.1)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("7_0ew61")
+centered = false
+
+[node name="IceShroom_head" type="Sprite2D" parent="Body"]
+position = Vector2(-1.4, 1.5)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("8_37res")
+centered = false

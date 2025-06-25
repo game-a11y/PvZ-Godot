@@ -1,0 +1,223 @@
+[gd_scene load_steps=31 format=3 uid="uid://bt07br5ypejyq"]
+
+[ext_resource type="Script" uid="uid://xmlolyqvbiue" path="res://scripts/character/plant/010_sun_shroom.gd" id="1_dmoof"]
+[ext_resource type="PackedScene" uid="uid://f0wyiq6h4jnl" path="res://scenes/item/game_scenes_item/sun.tscn" id="2_hwl54"]
+[ext_resource type="Texture2D" uid="uid://boh05go0jrax1" path="res://assets/reanim/SunShroom_blink2.png" id="4_veen5"]
+[ext_resource type="Texture2D" uid="uid://d0hpo2yp78fwc" path="res://assets/image/plant/plantshadow.png" id="5_2je2o"]
+[ext_resource type="Texture2D" uid="uid://d3fiedp7rmj02" path="res://assets/reanim/SunShroom_body.png" id="5_5cx50"]
+[ext_resource type="Animation" uid="uid://bhw1sr8amdvdl" path="res://animation/character/plant/010_sun_shroom/SunShroom_bigidle.tres" id="5_57mnc"]
+[ext_resource type="Texture2D" uid="uid://ca27om0ioxih0" path="res://assets/reanim/SunShroom_blink1.png" id="6_2je2o"]
+[ext_resource type="Animation" uid="uid://bdhli4iadxd5h" path="res://animation/character/plant/010_sun_shroom/SunShroom_bigsleep.tres" id="6_veen5"]
+[ext_resource type="Animation" uid="uid://d0id5g5kd6ug4" path="res://animation/character/plant/010_sun_shroom/SunShroom_grow.tres" id="7_56678"]
+[ext_resource type="Texture2D" uid="uid://cwpdbv6tcn38g" path="res://assets/reanim/SunShroom_head.png" id="7_oyc14"]
+[ext_resource type="Animation" uid="uid://da8e21tx8kpxv" path="res://animation/character/plant/010_sun_shroom/SunShroom_idle.tres" id="8_gq4j5"]
+[ext_resource type="Animation" uid="uid://cswajbnwiqpv0" path="res://animation/character/plant/010_sun_shroom/SunShroom_sleep.tres" id="9_6qegl"]
+[ext_resource type="PackedScene" uid="uid://dk13yxwm7s2j8" path="res://scenes/character/plant/sleep_shroom_base.tscn" id="11_2m7o2"]
+[ext_resource type="AudioStream" uid="uid://s21wj2ofe4v7" path="res://assets/audio/SFX/plant/plantgrow.ogg" id="15_2je2o"]
+[ext_resource type="AudioStream" uid="uid://bhtavkuui5a5i" path="res://assets/audio/SFX/plant/throw1.ogg" id="16_oyc14"]
+
+[sub_resource type="Animation" id="Animation_qx6q8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/Anim_blink:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(37.1, 50.7854)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/shadow:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(41, 61)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/shadow:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body/shadow:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.796914, 0.736522)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body/shadow:skew")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6h3r7"]
+_data = {
+&"RESET": SubResource("Animation_qx6q8"),
+&"SunShroom_bigidle": ExtResource("5_57mnc"),
+&"SunShroom_bigsleep": ExtResource("6_veen5"),
+&"SunShroom_grow": ExtResource("7_56678"),
+&"SunShroom_idle": ExtResource("8_gq4j5"),
+&"SunShroom_sleep": ExtResource("9_6qegl")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tc41y"]
+animation = &"SunShroom_bigidle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_igemf"]
+animation = &"SunShroom_bigsleep"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_21iv2"]
+animation = &"SunShroom_grow"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hlh3c"]
+animation = &"SunShroom_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nf1qf"]
+animation = &"SunShroom_sleep"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wokip"]
+advance_mode = 2
+advance_expression = "is_grow"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_glqr6"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bkxr5"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rx3yf"]
+advance_mode = 2
+advance_expression = "not is_sleep"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ebjf4"]
+states/Start/position = Vector2(154, 100)
+states/SunShroom_bigidle/node = SubResource("AnimationNodeAnimation_tc41y")
+states/SunShroom_bigidle/position = Vector2(518, 258)
+states/SunShroom_bigsleep/node = SubResource("AnimationNodeAnimation_igemf")
+states/SunShroom_bigsleep/position = Vector2(289, 253)
+states/SunShroom_grow/node = SubResource("AnimationNodeAnimation_21iv2")
+states/SunShroom_grow/position = Vector2(518, 166)
+states/SunShroom_idle/node = SubResource("AnimationNodeAnimation_hlh3c")
+states/SunShroom_idle/position = Vector2(518, 79)
+states/SunShroom_sleep/node = SubResource("AnimationNodeAnimation_nf1qf")
+states/SunShroom_sleep/position = Vector2(347, -2)
+transitions = ["SunShroom_idle", "SunShroom_grow", SubResource("AnimationNodeStateMachineTransition_wokip"), "SunShroom_grow", "SunShroom_bigidle", SubResource("AnimationNodeStateMachineTransition_glqr6"), "Start", "SunShroom_sleep", SubResource("AnimationNodeStateMachineTransition_bkxr5"), "SunShroom_sleep", "SunShroom_idle", SubResource("AnimationNodeStateMachineTransition_rx3yf")]
+graph_offset = Vector2(30, -38)
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_rikvi"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_1lsj8"]
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_ebjf4")
+nodes/StateMachine/position = Vector2(280, 100)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_rikvi")
+nodes/TimeScale/position = Vector2(580, 100)
+nodes/output/position = Vector2(800, 120)
+node_connections = [&"TimeScale", 0, &"StateMachine", &"output", 0, &"TimeScale"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tc41y"]
+size = Vector2(50, 60)
+
+[node name="SunShroom" type="Node2D" node_paths=PackedStringArray("blink_sprite")]
+script = ExtResource("1_dmoof")
+sun_scene = ExtResource("2_hwl54")
+sun_value = 15
+blink_sprite = NodePath("Body/Anim_blink")
+blink_sprite_texture = Array[Texture]([ExtResource("6_2je2o"), ExtResource("4_veen5")])
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-41, -49)
+
+[node name="shadow" type="Sprite2D" parent="Body"]
+position = Vector2(41, 61)
+scale = Vector2(0.796914, 0.736522)
+texture = ExtResource("5_2je2o")
+
+[node name="Anim_face" type="Sprite2D" parent="Body"]
+position = Vector2(31.1, 47.5)
+scale = Vector2(0.36, 0.36)
+texture = ExtResource("5_5cx50")
+centered = false
+
+[node name="Anim_sleep1" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Anim_blink" type="Sprite2D" parent="Body"]
+visible = false
+self_modulate = Color(0, 0, 0, 1)
+position = Vector2(37.1, 50.7854)
+scale = Vector2(1e-05, 1e-05)
+centered = false
+
+[node name="SunShroom_head" type="Sprite2D" parent="Body"]
+position = Vector2(26, 26.6)
+rotation = 0.07854
+scale = Vector2(0.36, 0.36)
+texture = ExtResource("7_oyc14")
+centered = false
+
+[node name="Sun" type="Node2D" parent="."]
+position = Vector2(-1, -11)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_6h3r7")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_1lsj8")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/TimeScale/scale = 1.0
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_tc41y")
+
+[node name="ProductionTimer" type="Timer" parent="."]
+
+[node name="GrowTimer" type="Timer" parent="."]
+
+[node name="SleepShroom" parent="." instance=ExtResource("11_2m7o2")]
+
+[node name="Plantgrow" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_2je2o")
+bus = &"SFX"
+
+[node name="Throw" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_oyc14")
+bus = &"SFX"

@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://tdeb1tcu5cb3"]
+
+[ext_resource type="Texture2D" uid="uid://dmch2r8l3fn1c" path="res://assets/reanim/HypnoShroom_eye1.png" id="1_fuck"]
+[ext_resource type="Texture2D" uid="uid://cbgu3a2jxkthd" path="res://assets/reanim/HypnoShroom_body.png" id="1_s7rqp"]
+[ext_resource type="Texture2D" uid="uid://c3tp56xwnaj8k" path="res://assets/reanim/HypnoShroom_head.png" id="3_dx8x1"]
+[ext_resource type="Texture2D" uid="uid://bm4iskcgxt1lx" path="res://assets/reanim/HypnoShroom_eye2.png" id="4_fuck"]
+
+[node name="HypnoShroom" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-37, -45)
+
+[node name="Layer 1" type="Sprite2D" parent="Body"]
+position = Vector2(21.5, 35.8)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_s7rqp")
+centered = false
+
+[node name="Layer 3" type="Sprite2D" parent="Body"]
+position = Vector2(37.3, 49.7)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_fuck")
+centered = false
+
+[node name="Layer 2" type="Sprite2D" parent="Body"]
+position = Vector2(11.8, 1.2)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_dx8x1")
+centered = false
+
+[node name="Layer 4" type="Sprite2D" parent="Body"]
+position = Vector2(48.7, 51)
+scale = Vector2(0.618, 0.618)
+texture = ExtResource("4_fuck")
+centered = false

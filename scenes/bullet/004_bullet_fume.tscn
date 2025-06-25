@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://cghhn7nuemrci"]
+
+[ext_resource type="Script" uid="uid://ctpegdqe0mdpg" path="res://scripts/bullet/004_bullet_fume.gd" id="1_fkqdm"]
+[ext_resource type="Texture2D" uid="uid://c4rbih2yuv0vx" path="res://assets/image/projectile/ProjectilePea.png" id="2_fkqdm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xw0nn"]
+radius = 6.08276
+
+[node name="BulletFume" type="Node2D"]
+script = ExtResource("1_fkqdm")
+speed = 500.0
+bullet_mode = 1
+max_distance = 350.0
+
+[node name="PuffBulletBody" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.625, 0.666667)
+texture = ExtResource("2_fkqdm")
+
+[node name="Area2D" type="Area2D" parent="." groups=["Zombie"]]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_xw0nn")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

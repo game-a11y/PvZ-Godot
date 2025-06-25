@@ -32,9 +32,9 @@ var new_plant_static_shadow_colum : Array
 ## 植物种植泥土粒子特效
 const PlantStartEffectScene = preload("res://scenes/character/plant/plant_start_effect.tscn")
 
-
 ## 墓碑场景，黑夜关卡加载
-var tombstone_scenes:PackedScene
+const tombstone_scenes:PackedScene =  preload("res://scenes/item/game_scenes_item/tombstone.tscn")
+
 var is_tombstone := []
 var tombstone_num := 0
 
@@ -65,10 +65,7 @@ func init_plant_cells():
 		
 		is_tombstone.append(is_tombstone_row)
 		
-func init_tombstone_scenes():
-	## 墓碑场景
-	tombstone_scenes = load("res://scenes/Tombstone/tombstone.tscn")
-	
+
 
 ## 卡片和铲子信号连接
 func card_game_signal_connect(cards:Array[Card], shovel_bg):
@@ -120,20 +117,19 @@ func _manage_shovel() -> void:
 
 # 点击种植或铲掉植物
 func _on_click_cell(plant_cell:PlantCell):
-	if new_plant_static and not plant_cell.is_plant and not plant_cell.is_tombstone:
-		
+	
+	if new_plant_static and plant_cell.can_common_plant:
 		SoundManager.play_sfx("PlantCreate/Plant1")
 		
 		if main_game.mode_column:
 			for i in len(plant_cells_array):
 				var plant_cell_row_col:PlantCell = plant_cells_array[i][plant_cell.row_col.y]
 				## 如果当前cell已有植物
-				if plant_cell_row_col.is_plant:
+				if not plant_cell_row_col.can_common_plant:
 					continue
 				# 创建植物
 				_create_new_plant(curr_card.card_type, plant_cell_row_col)
 		
-				
 		else:
 			# 创建植物
 			_create_new_plant(curr_card.card_type, plant_cell)
@@ -145,6 +141,22 @@ func _on_click_cell(plant_cell:PlantCell):
 		
 		new_plant_static_in_cell = false
 		_cancel_plant_or_end()
+		
+	## 如果是墓碑吞噬者   #TODO: 柱子模式
+	elif new_plant_static and plant_cell.is_tombstone and curr_card.card_type == Global.PlantType.GraveBuster:
+		SoundManager.play_sfx("PlantCreate/Plant1")
+		# 创建植物
+		var grave_buster:GraveBuster = _create_new_plant(curr_card.card_type, plant_cell)
+		grave_buster.start_eat_grave()
+		
+		# 减少阳光，卡片冷却
+		card_manager.sun = card_manager.sun - curr_card.sun_cost
+		curr_card.card_cool()
+		
+		new_plant_static_in_cell = false
+		_cancel_plant_or_end()
+
+	
 		
 	# 手拿铲子并且当前存在被铲子威胁的植物
 	if is_shovel and plant_be_shovel_look:
@@ -158,6 +170,7 @@ func _create_new_plant(plant_type:Global.PlantType, plant_cell:PlantCell):
 	
 	plant_cell.add_child(new_plant)
 	curr_plants.append(new_plant)
+	
 	new_plant.plant_free_signal.connect(_one_plant_free)
 	new_plant.plant_free_signal.connect(plant_cell.one_plant_free)
 	
@@ -168,7 +181,9 @@ func _create_new_plant(plant_type:Global.PlantType, plant_cell:PlantCell):
 	
 	var plant_start_effect_scene = PlantStartEffectScene.instantiate()
 	new_plant.add_child(plant_start_effect_scene)
-
+	
+	return new_plant
+	
 func _one_plant_free(plant:PlantBase):
 	curr_plants.erase(plant)
 	
@@ -176,7 +191,8 @@ func _one_plant_free(plant:PlantBase):
 # 鼠标进入cell
 func _on_cell_mouse_enter(plant_cell:PlantCell):
 	
-	if new_plant_static and not plant_cell.is_plant and not plant_cell.is_tombstone:
+	## 存在植物、格子普通植物可以种植、植物不是墓碑吞
+	if new_plant_static and plant_cell.can_common_plant and curr_card.card_type != Global.PlantType.GraveBuster:
 		
 		new_plant_static_in_cell = true
 		
@@ -197,8 +213,17 @@ func _on_cell_mouse_enter(plant_cell:PlantCell):
 		else:
 			new_plant_static_shadow.global_position = plant_cell.plant_position.global_position
 			new_plant_static_shadow.modulate.a = 0.5
-
 	
+	## 如果是墓碑吞噬者
+	#TODO: 柱子模式
+	elif new_plant_static and plant_cell.is_tombstone and curr_card.card_type == Global.PlantType.GraveBuster:
+		
+		new_plant_static_in_cell = true
+		
+		new_plant_static_shadow.global_position = plant_cell.plant_position.global_position
+		new_plant_static_shadow.modulate.a = 0.5
+
+
 	# 如果手拿铲子
 	if is_shovel and plant_cell.plant:
 		plant_be_shovel_look = plant_cell.plant
@@ -324,13 +349,23 @@ func _reandom_tombstone_pos(new_num:int) ->  Array[Vector2i]:
 func _create_one_tombstone(plant_cell: PlantCell, pos:Vector2i):
 	assert(not plant_cell.is_tombstone and not is_tombstone[plant_cell.row_col.x][plant_cell.row_col.y])
 	var tombstone :Node2D= tombstone_scenes.instantiate()
-	plant_cell.add_child(tombstone)
-	tombstone.position = Vector2(39,48)
+	
+	## plant_cell生成墓碑并连接信号
+	plant_cell.create_tombstone(tombstone)
+	plant_cell.cell_delete_tombstone.connect(_delete_tombstone)
 	
 	# 创建墓碑相关参数变化
-	plant_cell.is_tombstone = true
 	is_tombstone[pos.x][pos.y] = true
 	tombstone_num += 1
+
+
+## 修改对应的参数并断开信号连接
+func _delete_tombstone(plant_cell:PlantCell):
+	plant_cell.cell_delete_tombstone.disconnect(_delete_tombstone)
+	
+	var pos:Vector2i = plant_cell.row_col
+	is_tombstone[pos.x][pos.y] = false
+	tombstone_num -= 1
 
 
 ## 黑夜关卡生成墓碑（生成数量，生成的最大列数，从右向左）

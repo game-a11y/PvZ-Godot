@@ -12,3 +12,7 @@ func _on_area_entered(area: Area2D) -> void:
 func resume_game():
 	get_tree().paused = false
 	get_tree().reload_current_scene()
+	
+	Global.time_scale = 1.0
+	Engine.time_scale = Global.time_scale
+	

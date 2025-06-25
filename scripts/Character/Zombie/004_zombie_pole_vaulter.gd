@@ -53,15 +53,16 @@ func _jump_end():
 	if is_jump:
 		is_jump = false
 		# 设置碰撞层
-		$Area2D.collision_layer = 4
-		walking_status = WalkingStatus.start
-		# 动画结束后将body中的所有部分都改为初始位置，并修改本体位置，保持body的位置不变
-		for body_i in body.get_children():
-			if body_i is Node2D:  # 确保节点有position属性
-				body_i.position.x += 150
-		global_position.x -= 150 
-		
-		$Area2D.position.x = 0
+		if area2d:
+			area2d.collision_layer = 4
+			walking_status = WalkingStatus.start
+			# 动画结束后将body中的所有部分都改为初始位置，并修改本体位置，保持body的位置不变
+			for body_i in body.get_children():
+				if body_i is Node2D:  # 确保节点有position属性
+					body_i.position.x += 150
+			global_position.x -= 150 
+			
+			area2d.position.x = 0
 
 ## 分循环动画结束时调用
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:

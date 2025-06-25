@@ -67,6 +67,11 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "显示植物血量"
 
+[node name="CheckBox6" type="CheckBox" parent="OptionBG/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "显示僵尸血量"
+
 [node name="TextureButton" type="TextureButton" parent="OptionBG"]
 layout_mode = 0
 offset_left = 550.0
@@ -92,4 +97,5 @@ text = "关闭"
 [connection signal="toggled" from="OptionBG/HBoxContainer/VBoxContainer/CheckBox3" to="." method="_on_check_box_3_toggled"]
 [connection signal="toggled" from="OptionBG/HBoxContainer/VBoxContainer/CheckBox4" to="." method="_on_check_box_4_toggled"]
 [connection signal="toggled" from="OptionBG/HBoxContainer/VBoxContainer/CheckBox5" to="." method="_on_check_box_5_toggled"]
+[connection signal="toggled" from="OptionBG/HBoxContainer/VBoxContainer/CheckBox6" to="." method="_on_check_box_6_toggled"]
 [connection signal="pressed" from="OptionBG/TextureButton" to="." method="_on_texture_button_pressed"]

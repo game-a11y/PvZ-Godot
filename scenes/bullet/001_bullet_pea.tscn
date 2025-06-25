@@ -49,9 +49,10 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_xw0nn")
 
-[node name="BulletEffect" type="Node2D" parent="."]
+[node name="BulletEffect" type="Node2D" parent="." node_paths=PackedStringArray("splats")]
 visible = false
 script = ExtResource("4_pddgq")
+splats = NodePath("Splats")
 
 [node name="Splats" type="Sprite2D" parent="BulletEffect"]
 texture = ExtResource("4_hg162")

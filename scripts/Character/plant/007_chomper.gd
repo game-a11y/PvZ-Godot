@@ -48,7 +48,7 @@ func _eat_zombie():
 			var parent :ZombieBase= collider.get_parent()
 
 			if not parent.area2d_free:
-				parent.be_chomper_death()
+				parent.disappear_death()
 				is_eating = true
 			
 				is_end_eat = false

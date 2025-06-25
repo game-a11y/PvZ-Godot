@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://l2p51ejr4l2i"]
+
+[ext_resource type="Texture2D" uid="uid://8othbxgdaxqc" path="res://assets/reanim/PuffShroom_body.png" id="6_ilaeo"]
+[ext_resource type="Texture2D" uid="uid://7o5qmisxmqhk" path="res://assets/reanim/PuffShroom_stem.png" id="7_nqk2j"]
+[ext_resource type="Texture2D" uid="uid://bp35mb8xfhk3r" path="res://assets/reanim/PuffShroom_tip.png" id="8_ynuw6"]
+[ext_resource type="Texture2D" uid="uid://c1s61ypq4l5s7" path="res://assets/reanim/PuffShroom_head.png" id="9_6t30x"]
+[ext_resource type="Texture2D" uid="uid://yjc7pkf5hdn2" path="res://assets/image/particles/bullet/PuffShroom_puff1.png" id="10_evyi1"]
+
+[node name="PuffShroom" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-41, -49)
+
+[node name="Anim_sleep" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Anim_shooting" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Anim_idle" type="Sprite2D" parent="Body"]
+centered = false
+
+[node name="Anim_face" type="Sprite2D" parent="Body"]
+position = Vector2(29.3, 46.2991)
+scale = Vector2(0.44, 0.449024)
+texture = ExtResource("6_ilaeo")
+centered = false
+
+[node name="PuffShroom_stem" type="Sprite2D" parent="Body"]
+position = Vector2(47.6, 50.7994)
+scale = Vector2(0.45, 0.459027)
+texture = ExtResource("7_nqk2j")
+centered = false
+
+[node name="PuffShroom_tip" type="Sprite2D" parent="Body"]
+position = Vector2(49.4, 48.5997)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("8_ynuw6")
+centered = false
+
+[node name="PuffShroom_head" type="Sprite2D" parent="Body"]
+position = Vector2(22.5003, 27.7982)
+scale = Vector2(0.436991, 0.449027)
+texture = ExtResource("9_6t30x")
+centered = false
+
+[node name="PuffShroom_eyes" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="Anim_blink" type="Sprite2D" parent="Body"]
+visible = false
+modulate = Color(1, 1, 1, 0.560784)
+self_modulate = Color(0, 0, 0, 1)
+position = Vector2(43.97, 49.2518)
+scale = Vector2(1e-05, 1e-05)
+centered = false
+
+[node name="PuffShroomPuff1" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(55, 53)
+scale = Vector2(0.5, 0.592593)
+texture = ExtResource("10_evyi1")

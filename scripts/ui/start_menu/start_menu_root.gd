@@ -13,6 +13,11 @@ func _ready() -> void:
 	SoundManager.setup_ui_start_menu_sound(self)
 	SoundManager.play_bgm(bgm)
 	
+	Global.time_scale = 1.0
+	Engine.time_scale = Global.time_scale
+
+
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -22,9 +27,9 @@ func _process(delta: float) -> void:
 func _unrealized():
 	dialog.appear_dialog()
 
-
+## 开始游戏
 func _on_menu_button_1_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/main/MainGame.tscn")
+	get_tree().change_scene_to_file(Global.MainScenesMap[Global.MainScenes.ChooseLevel])
 
 
 func _on_option_button_1_pressed() -> void:

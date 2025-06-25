@@ -1,0 +1,90 @@
+[gd_scene load_steps=10 format=3 uid="uid://dx2oo8txtvgb3"]
+
+[ext_resource type="Texture2D" uid="uid://d1ync1uai7er" path="res://assets/reanim/ScaredyShroom_head_inner.png" id="11_j0icp"]
+[ext_resource type="Texture2D" uid="uid://btr2esyduvxjn" path="res://assets/reanim/ScaredyShroom_stem.png" id="12_rfw5w"]
+[ext_resource type="Texture2D" uid="uid://dmc0tn8f0rcd5" path="res://assets/reanim/ScaredyShroom_eye2.png" id="13_1hpda"]
+[ext_resource type="Texture2D" uid="uid://cj53l4356v4lt" path="res://assets/reanim/ScaredyShroom_mouth.png" id="15_vf20r"]
+[ext_resource type="Texture2D" uid="uid://bmomuy6csllx2" path="res://assets/reanim/ScaredyShroom_lips.png" id="16_rw5mw"]
+[ext_resource type="Texture2D" uid="uid://bhy6v2sefb34e" path="res://assets/reanim/ScaredyShroom_eye1.png" id="17_u4bwb"]
+[ext_resource type="Texture2D" uid="uid://4jhqxlj4kfll" path="res://assets/reanim/ScaredyShroom_head.png" id="18_q1sg4"]
+[ext_resource type="Texture2D" uid="uid://b1ju30d8vymd8" path="res://assets/reanim/ScaredyShroom_eyebrow1.png" id="20_sg12y"]
+[ext_resource type="Texture2D" uid="uid://ciqsgbjvs6q4g" path="res://assets/reanim/ScaredyShroom_eyebrow2.png" id="21_78ehf"]
+
+[node name="ScaredyShroom" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(-35, -47)
+
+[node name="ScaredyShroom_head_inner" type="Sprite2D" parent="Body"]
+position = Vector2(22.5, 25.6)
+scale = Vector2(0.762, 0.8)
+texture = ExtResource("11_j0icp")
+centered = false
+
+[node name="Anim_face" type="Sprite2D" parent="Body"]
+position = Vector2(27.6, 35.1)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("12_rfw5w")
+centered = false
+
+[node name="Anim_eye2" type="Sprite2D" parent="Body"]
+position = Vector2(39.4, 33.1)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("13_1hpda")
+centered = false
+
+[node name="ScaredyShroom_eye_big2" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="ScaredyShroom_mouth" type="Sprite2D" parent="Body"]
+position = Vector2(38.5, 43.6)
+scale = Vector2(1.6, 0.8)
+texture = ExtResource("15_vf20r")
+centered = false
+
+[node name="ScaredyShroom_lips" type="Sprite2D" parent="Body"]
+position = Vector2(43.5, 39.5)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("16_rw5mw")
+centered = false
+
+[node name="Anim_eye1" type="Sprite2D" parent="Body"]
+position = Vector2(33.4, 34.9)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("17_u4bwb")
+centered = false
+
+[node name="ScaredyShroom_eye_big1" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="ScaredyShroom_head" type="Sprite2D" parent="Body"]
+position = Vector2(5.2, 6.6)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("18_q1sg4")
+centered = false
+
+[node name="ScaredyShroom_head2" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="ScaredyShroom_eyebrow1" type="Sprite2D" parent="Body"]
+position = Vector2(28.2, 30)
+scale = Vector2(1.018, 0.8)
+texture = ExtResource("20_sg12y")
+centered = false
+
+[node name="ScaredyShroom_eyebrow2" type="Sprite2D" parent="Body"]
+position = Vector2(38.6, 26.5)
+texture = ExtResource("21_78ehf")
+centered = false
+
+[node name="ScaredyShroom_sweat2" type="Sprite2D" parent="Body"]
+visible = false
+centered = false
+
+[node name="ScaredyShroom_sweat1" type="Sprite2D" parent="Body"]
+visible = false
+centered = false

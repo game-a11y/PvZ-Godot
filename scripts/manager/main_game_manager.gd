@@ -7,6 +7,9 @@ class_name MainGameManager
 @onready var hand_manager: HandManager = $Manager/HandManager
 @onready var zombie_manager: ZombieManager = $Manager/ZombieManager
 @onready var card_manager: CardManager = $Camera2D/CardManager
+## 控制台
+@onready var control_panel: ControlCanvasLayer = $CanvasLayer/All_UI/MainGameMenuOptionDialog/Option/Button4/CanvasLayer
+
 #endregion
 
 
@@ -97,12 +100,14 @@ var main_game_progress:MainGameProgress
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	## 初始化游戏，游戏背景
+	_init_main_game()
 	## 初始化僵尸管理器
 	zombie_manager.init_zombie_manager(zombies, max_wave)
 	## 初始化植物种植区域
 	hand_manager.init_plant_cells()
-	## 初始化游戏，游戏背景
-	_init_main_game()
+	
+	control_panel.init_control_panel()
 	## 主游戏进程
 	main_game_progress = MainGameProgress.CHOOSE_CARD
 	
@@ -127,20 +132,29 @@ func _ready() -> void:
 		## 测试场景初始化植物卡片
 		card_manager.test_scenes_init_cards()
 		## 设置信号连接
-		hand_manager.card_game_signal_connect(card_manager.cards, card_manager.shovel_bg)
+		#hand_manager.card_game_signal_connect(card_manager.cards, card_manager.shovel_bg)
 
 # 初始化游戏，游戏背景
 func _init_main_game():
+	var path_bgm_main_game
+	match Global.main_game_level:
+		Global.MainGameLevel.FrontDay:
+			game_bg = Global.GameBg.FrontDay
+			path_bgm_main_game = Global.MainGameLevelBgmMap[Global.GameBg.FrontDay]
+			
+			
+		Global.MainGameLevel.FrontNight:
+			game_bg = Global.GameBg.FrontNight
+			path_bgm_main_game = Global.MainGameLevelBgmMap[Global.GameBg.FrontNight]
+			
+	bgm_main_game = load(path_bgm_main_game) as AudioStream
+	
 	var texture: Texture2D = Global.GameBgTextureMap.get(game_bg, null)
 	if texture:
 		background.texture = texture
 	else:
 		push_error("未找到背景贴图，枚举值: %d" % game_bg)
 	
-	if game_bg == Global.GameBg.FrontNight:
-		## 加载墓碑场景
-		hand_manager.init_tombstone_scenes()
-
 
 ## 选择卡片完成后开始游戏
 func cheeosed_card_start_game():
@@ -189,4 +203,9 @@ func start_game_move_camera():
 	
 ## 显示植物血量
 func display_plant_HP_label():
+
 	hand_manager.display_plant_HP_label()
+
+## 显示僵尸血量
+func display_zombie_HP_label():
+	zombie_manager.display_zombie_HP_label()
